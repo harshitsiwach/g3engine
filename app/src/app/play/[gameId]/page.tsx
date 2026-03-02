@@ -10,16 +10,16 @@ export async function generateMetadata({ params }: PlayPageProps): Promise<Metad
 
     return {
         title: `Play Game - ${gameId}`,
-        description: 'Play this interactive 3D game built with Web3 Game Engine',
+        description: 'Play this interactive 3D game built with G3Engine',
         openGraph: {
             title: `Play Game - ${gameId}`,
-            description: 'Play this interactive 3D game built with Web3 Game Engine',
+            description: 'Play this interactive 3D game built with G3Engine',
             type: 'website',
         },
         twitter: {
             card: 'player',
             title: `Play Game - ${gameId}`,
-            description: 'Play this interactive 3D game built with Web3 Game Engine',
+            description: 'Play this interactive 3D game built with G3Engine',
             players: {
                 playerUrl: playerUrl,
                 width: 480,

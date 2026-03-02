@@ -61,7 +61,7 @@ export default function HomePage() {
         marginBottom: 12,
         textAlign: 'center',
       }}>
-        Web3 Game Engine
+        G3Engine
       </h1>
 
       {/* Subtitle */}
