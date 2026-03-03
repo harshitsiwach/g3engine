@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useEditorStore, TransformMode } from '@/store/editorStore';
 import { useWeb3Store } from '@/store/web3Store';
+import { useAIStore } from '@/store/aiStore';
 import PublishModal from '@/components/editor/PublishModal';
 import WalletButton from '@/components/web3/WalletButton';
 
@@ -228,6 +229,23 @@ function TopBarContent() {
 
                 {/* Wallet */}
                 {web3Enabled && <WalletButton />}
+
+                <div className="toolbar-divider" />
+
+                {/* AI Assistant */}
+                <button
+                    className="btn"
+                    onClick={() => useAIStore.getState().toggleOpen()}
+                    data-tooltip="AI Assistant"
+                    style={{
+                        background: useAIStore.getState().isOpen ? 'rgba(139,92,246,0.18)' : undefined,
+                        borderColor: useAIStore.getState().isOpen ? 'rgba(139,92,246,0.4)' : undefined,
+                        color: useAIStore.getState().isOpen ? '#a78bfa' : undefined,
+                    }}
+                >
+                    <span style={{ fontSize: 14 }}>✨</span>
+                    <span style={{ fontSize: 11 }}>AI</span>
+                </button>
 
                 <div className="toolbar-divider" />
 

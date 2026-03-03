@@ -9,6 +9,7 @@ const LeftPanel = dynamic(() => import('@/components/layout/LeftPanel'), { ssr: 
 const RightPanel = dynamic(() => import('@/components/layout/RightPanel'), { ssr: false });
 const BottomPanel = dynamic(() => import('@/components/layout/BottomPanel'), { ssr: false });
 const Web3Panel = dynamic(() => import('@/components/web3/Web3Panel'), { ssr: false });
+const AIChatPanel = dynamic(() => import('@/components/ai/AIChatPanel'), { ssr: false });
 
 export default function EditorPage() {
     const web3Enabled = useEditorStore((s) => s.web3Enabled);
@@ -38,6 +39,9 @@ export default function EditorPage() {
                     <Web3Panel />
                 </div>
             )}
+
+            {/* AI Chat Panel */}
+            <AIChatPanel />
 
             <style jsx>{`
                 @keyframes slideInRight {
