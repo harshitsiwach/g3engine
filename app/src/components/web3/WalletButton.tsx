@@ -98,7 +98,7 @@ export default function WalletButton() {
                 }} />
                 {truncated}
                 <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 11 }}>
-                    {solBalance.toFixed(2)} SOL
+                    {(solBalance ?? 0).toFixed(2)} SOL
                 </span>
             </div>
             <button
