@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import { useEditorStore, TransformMode } from '@/store/editorStore';
+import { useWeb3Store } from '@/store/web3Store';
 import PublishModal from '@/components/editor/PublishModal';
+import WalletButton from '@/components/web3/WalletButton';
 
 // ---------- SVG Icons ----------
 
@@ -133,7 +135,7 @@ function TopBarContent() {
                         ⬡
                     </div>
                     <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
-                        Engine
+                        G3Engine
                     </span>
                 </div>
 
@@ -217,9 +219,15 @@ function TopBarContent() {
                     </span>
                     <div
                         className={`toggle-switch ${web3Enabled ? 'active' : ''}`}
-                        onClick={toggleWeb3}
+                        onClick={() => {
+                            toggleWeb3();
+                            useWeb3Store.getState().setWeb3PanelOpen(!web3Enabled);
+                        }}
                     />
                 </div>
+
+                {/* Wallet */}
+                {web3Enabled && <WalletButton />}
 
                 <div className="toolbar-divider" />
 

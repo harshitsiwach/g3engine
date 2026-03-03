@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SolanaProvider from "@/providers/SolanaProvider";
 
 export const metadata: Metadata = {
   title: "G3Engine",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <SolanaProvider>{children}</SolanaProvider>
+      </body>
     </html>
   );
 }

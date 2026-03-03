@@ -458,28 +458,98 @@ const NODE_PALETTE: NodeTemplate[] = [
         compact: true,
     },
 
-    // Web3
+    // ── Web3 / Pump.fun ──
     {
-        label: 'Mint NFT',
+        label: '🚀 Launch Token (Pump.fun)',
         category: 'web3',
-        icon: '⬡',
-        description: 'Mint an NFT token',
+        icon: '🚀',
+        description: 'Launch a token on Pump.fun bonding curve',
         inputs: [
             { id: 'exec-in', label: '', type: 'exec' },
-            { id: 'metadata', label: 'Metadata', type: 'string' },
+            { id: 'name', label: 'Name', type: 'string' },
+            { id: 'symbol', label: 'Symbol', type: 'string' },
+            { id: 'imageUri', label: 'Image URI', type: 'string' },
         ],
         outputs: [
             { id: 'exec-out', label: '', type: 'exec' },
-            { id: 'tokenId', label: 'Token ID', type: 'int' },
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+            { id: 'txHash', label: 'Tx Hash', type: 'string' },
         ],
     },
     {
-        label: 'Check Balance',
+        label: '💰 Buy Token (Pump.fun)',
         category: 'web3',
         icon: '💰',
-        description: 'Get wallet token balance',
+        description: 'Buy tokens on Pump.fun bonding curve',
         inputs: [
-            { id: 'wallet', label: 'Wallet', type: 'string' },
+            { id: 'exec-in', label: '', type: 'exec' },
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+            { id: 'solAmount', label: 'SOL Amount', type: 'float' },
+            { id: 'slippage', label: 'Slippage %', type: 'float' },
+        ],
+        outputs: [
+            { id: 'exec-out', label: '', type: 'exec' },
+            { id: 'tokensReceived', label: 'Tokens', type: 'float' },
+            { id: 'txHash', label: 'Tx Hash', type: 'string' },
+        ],
+    },
+    {
+        label: '💸 Sell Token (Pump.fun)',
+        category: 'web3',
+        icon: '💸',
+        description: 'Sell tokens on Pump.fun bonding curve',
+        inputs: [
+            { id: 'exec-in', label: '', type: 'exec' },
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+            { id: 'tokenAmount', label: 'Token Amount', type: 'float' },
+            { id: 'slippage', label: 'Slippage %', type: 'float' },
+        ],
+        outputs: [
+            { id: 'exec-out', label: '', type: 'exec' },
+            { id: 'solReceived', label: 'SOL Received', type: 'float' },
+            { id: 'txHash', label: 'Tx Hash', type: 'string' },
+        ],
+    },
+    {
+        label: '🎨 Mint NFT',
+        category: 'web3',
+        icon: '🎨',
+        description: 'Mint an NFT from a game asset',
+        inputs: [
+            { id: 'exec-in', label: '', type: 'exec' },
+            { id: 'name', label: 'Name', type: 'string' },
+            { id: 'imageUri', label: 'Image URI', type: 'string' },
+            { id: 'attributes', label: 'Attributes', type: 'object' },
+        ],
+        outputs: [
+            { id: 'exec-out', label: '', type: 'exec' },
+            { id: 'mintAddress', label: 'Mint Address', type: 'string' },
+            { id: 'txHash', label: 'Tx Hash', type: 'string' },
+        ],
+    },
+    {
+        label: '🔐 Token Gate',
+        category: 'web3',
+        icon: '🔐',
+        description: 'Check if player holds enough tokens to access content',
+        inputs: [
+            { id: 'exec-in', label: '', type: 'exec' },
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+            { id: 'minBalance', label: 'Min Balance', type: 'float' },
+        ],
+        outputs: [
+            { id: 'exec-pass', label: 'Has Access', type: 'exec' },
+            { id: 'exec-fail', label: 'No Access', type: 'exec' },
+            { id: 'balance', label: 'Balance', type: 'float' },
+        ],
+    },
+    {
+        label: '💎 Check Balance',
+        category: 'web3',
+        icon: '💎',
+        description: 'Get token or SOL balance for connected wallet',
+        inputs: [
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
         ],
         outputs: [
             { id: 'balance', label: 'Balance', type: 'float' },
@@ -487,19 +557,64 @@ const NODE_PALETTE: NodeTemplate[] = [
         compact: true,
     },
     {
-        label: 'Send Transaction',
+        label: '🏦 Airdrop Tokens',
         category: 'web3',
-        icon: '📤',
-        description: 'Send a blockchain tx',
+        icon: '🏦',
+        description: 'Send tokens to a player address',
         inputs: [
             { id: 'exec-in', label: '', type: 'exec' },
-            { id: 'to', label: 'To', type: 'string' },
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+            { id: 'recipient', label: 'Recipient', type: 'string' },
             { id: 'amount', label: 'Amount', type: 'float' },
         ],
         outputs: [
             { id: 'exec-out', label: '', type: 'exec' },
             { id: 'txHash', label: 'Tx Hash', type: 'string' },
         ],
+    },
+    {
+        label: '⬡ Send SOL',
+        category: 'web3',
+        icon: '⬡',
+        description: 'Transfer SOL to another wallet',
+        inputs: [
+            { id: 'exec-in', label: '', type: 'exec' },
+            { id: 'recipient', label: 'Recipient', type: 'string' },
+            { id: 'amount', label: 'SOL Amount', type: 'float' },
+        ],
+        outputs: [
+            { id: 'exec-out', label: '', type: 'exec' },
+            { id: 'txHash', label: 'Tx Hash', type: 'string' },
+        ],
+    },
+    {
+        label: '🎁 Reward Player',
+        category: 'web3',
+        icon: '🎁',
+        description: 'Give tokens as a game reward on events',
+        inputs: [
+            { id: 'exec-in', label: '', type: 'exec' },
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+            { id: 'amount', label: 'Amount', type: 'float' },
+        ],
+        outputs: [
+            { id: 'exec-out', label: '', type: 'exec' },
+            { id: 'txHash', label: 'Tx Hash', type: 'string' },
+        ],
+    },
+    {
+        label: '📊 Get Token Price',
+        category: 'web3',
+        icon: '📊',
+        description: 'Query bonding curve price from Pump.fun',
+        inputs: [
+            { id: 'tokenMint', label: 'Token Mint', type: 'string' },
+        ],
+        outputs: [
+            { id: 'priceInSol', label: 'Price (SOL)', type: 'float' },
+            { id: 'marketCap', label: 'Market Cap', type: 'float' },
+        ],
+        compact: true,
     },
 ];
 

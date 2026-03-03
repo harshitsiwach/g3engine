@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "pumpfun": {
+      "source": "sendaifun/skills",
+      "sourceType": "github",
+      "computedHash": "67a6179bef1ebf08b0775378c5f5d5d8811afc852469009b3f775e856c1d22e0"
+    }
+  }
+}
