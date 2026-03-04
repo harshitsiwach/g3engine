@@ -71,11 +71,14 @@ When asked to build a game or add objects, respond with a JSON block wrapped in 
 
 export async function POST(req: NextRequest) {
     try {
-        const { messages, apiKey } = await req.json();
+        const { messages, apiKey: userApiKey } = await req.json();
 
-        if (!apiKey) {
+        // Priority: server env key > user-provided key
+        const resolvedKey = process.env.OPENAI_API_KEY || userApiKey;
+
+        if (!resolvedKey) {
             return NextResponse.json(
-                { error: 'API key required. Add your OpenAI API key in the AI assistant settings.' },
+                { error: 'No API key available. Ask the project owner to set OPENAI_API_KEY, or add your own key in AI settings.' },
                 { status: 400 }
             );
         }
@@ -84,7 +87,7 @@ export async function POST(req: NextRequest) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
+                'Authorization': `Bearer ${resolvedKey}`,
             },
             body: JSON.stringify({
                 model: 'gpt-4o-mini',

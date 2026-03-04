@@ -25,7 +25,16 @@ export default function AIChatPanel() {
     const [showSettings, setShowSettings] = useState(false);
     const [tempKey, setTempKey] = useState(apiKey);
     const [buildLog, setBuildLog] = useState<string[]>([]);
+    const [hasServerKey, setHasServerKey] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    // Check if server has an API key configured
+    useEffect(() => {
+        fetch('/api/ai/status')
+            .then((r) => r.json())
+            .then((d) => setHasServerKey(d.hasServerKey))
+            .catch(() => { });
+    }, []);
 
     // Auto-scroll on new messages
     useEffect(() => {
@@ -38,9 +47,9 @@ export default function AIChatPanel() {
 
     const sendMessage = async (text: string) => {
         if (!text.trim()) return;
-        if (!apiKey) {
+        if (!apiKey && !hasServerKey) {
             setShowSettings(true);
-            setError('Please set your OpenAI API key first');
+            setError('No API key available. Set your own key, or ask the project owner to configure one on the server.');
             return;
         }
 
@@ -116,8 +125,19 @@ export default function AIChatPanel() {
                     borderBottom: '1px solid rgba(255,255,255,0.06)',
                     background: 'rgba(255,255,255,0.02)',
                 }}>
+                    {hasServerKey && (
+                        <div style={{
+                            display: 'flex', alignItems: 'center', gap: 6,
+                            padding: '8px 10px', borderRadius: 6, marginBottom: 8,
+                            background: 'rgba(20,241,149,0.08)',
+                            border: '1px solid rgba(20,241,149,0.15)',
+                        }}>
+                            <span style={{ color: '#14f195', fontSize: 14 }}>✓</span>
+                            <span style={{ fontSize: 11, color: '#14f195', fontWeight: 600 }}>Server API key active — AI is free to use!</span>
+                        </div>
+                    )}
                     <label style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', fontWeight: 600, display: 'block', marginBottom: 6 }}>
-                        OpenAI API Key
+                        {hasServerKey ? 'Override with your own key (optional)' : 'OpenAI API Key'}
                     </label>
                     <div style={{ display: 'flex', gap: 6 }}>
                         <input
@@ -142,7 +162,9 @@ export default function AIChatPanel() {
                         >Save</button>
                     </div>
                     <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 6 }}>
-                        Key is stored locally. Never sent to our servers.
+                        {hasServerKey
+                            ? 'Your own key overrides the server key. Leave empty to use the free server key.'
+                            : 'Key is stored locally in your browser.'}
                     </p>
                 </div>
             )}
@@ -262,7 +284,7 @@ export default function AIChatPanel() {
                             sendMessage(input);
                         }
                     }}
-                    placeholder={apiKey ? 'Describe what to build...' : 'Set API key in ⚙️ first'}
+                    placeholder={apiKey || hasServerKey ? 'Describe what to build...' : 'Set API key in ⚙️ first'}
                     disabled={isLoading}
                     style={{
                         flex: 1, padding: '10px 12px', borderRadius: 10,
