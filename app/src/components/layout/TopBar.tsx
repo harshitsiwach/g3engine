@@ -9,70 +9,25 @@ import WalletButton from '@/components/web3/WalletButton';
 
 // ---------- SVG Icons ----------
 
-const PlayIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M8 5v14l11-7z" />
-    </svg>
-);
+import {
+    PlayIcon,
+    StopIcon,
+    UndoIcon,
+    RedoIcon,
+    WrenchIcon,
+    PublishIcon,
+    Web3Icon,
+} from '@/components/icons';
 
-const StopIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <rect x="6" y="6" width="12" height="12" rx="1" />
-    </svg>
-);
-
-const UndoIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="1 4 1 10 7 10" />
-        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
-    </svg>
-);
-
-const RedoIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="23 4 23 10 17 10" />
-        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-    </svg>
-);
-
-const MoveIcon = () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="5 9 2 12 5 15" />
-        <polyline points="9 5 12 2 15 5" />
-        <polyline points="15 19 12 22 9 19" />
-        <polyline points="19 9 22 12 19 15" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <line x1="12" y1="2" x2="12" y2="22" />
-    </svg>
-);
-
-const RotateIcon = () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="23 4 23 10 17 10" />
-        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-    </svg>
-);
-
+// Using LayoutGrid as a sub for Scale, Wrench for Move, Redo for Rotate for now
+const MoveIcon = WrenchIcon;
+const RotateIcon = RedoIcon;
 const ScaleIcon = () => (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="15 3 21 3 21 9" />
         <polyline points="9 21 3 21 3 15" />
         <line x1="21" y1="3" x2="14" y2="10" />
         <line x1="3" y1="21" x2="10" y2="14" />
-    </svg>
-);
-
-const Web3Icon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-);
-
-const PublishIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-        <polyline points="16 6 12 2 8 6" />
-        <line x1="12" y1="2" x2="12" y2="15" />
     </svg>
 );
 
@@ -88,6 +43,7 @@ export default function TopBar() {
         setTransformMode,
         web3Enabled,
         toggleWeb3,
+        setRunTour,
     } = useEditorStore();
 
     if (isPlaying) return null;
@@ -108,6 +64,7 @@ function TopBarContent() {
         web3Enabled,
         toggleWeb3,
         isPlaying,
+        setRunTour,
     } = useEditorStore();
 
     const [showPublish, setShowPublish] = useState(false);
@@ -144,7 +101,7 @@ function TopBarContent() {
 
                 {/* Play / Stop */}
                 <button
-                    className={`btn ${isPlaying ? 'btn-danger' : 'btn-success'}`}
+                    className={`btn tour-play-btn ${isPlaying ? 'btn-danger' : 'btn-success'}`}
                     onClick={togglePlay}
                     data-tooltip={isPlaying ? 'Stop' : 'Play'}
                     style={isPlaying ? { background: 'rgba(239,68,68,0.15)', borderColor: 'rgba(239,68,68,0.3)', color: '#ef4444' } : {}}
@@ -249,8 +206,20 @@ function TopBarContent() {
 
                 <div className="toolbar-divider" />
 
+                {/* Tour / Help */}
+                <button
+                    className="btn"
+                    onClick={() => setRunTour(true)}
+                    data-tooltip="Editor Tour"
+                >
+                    <span style={{ fontSize: 14 }}>🧭</span>
+                    <span style={{ fontSize: 11 }}>Tour</span>
+                </button>
+
+                <div className="toolbar-divider" />
+
                 {/* Publish */}
-                <button className="btn btn-primary" data-tooltip="Publish Game" onClick={() => setShowPublish(true)}>
+                <button className="btn btn-primary tour-publish-btn" data-tooltip="Publish Game" onClick={() => setShowPublish(true)}>
                     <PublishIcon />
                     Publish
                 </button>

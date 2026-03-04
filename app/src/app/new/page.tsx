@@ -4,36 +4,55 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProjectStore, GameDimension, GameGenre, GameTemplate } from '@/store/projectStore';
 
+import {
+    GamepadIcon,
+    BoxIcon,
+    PersonIcon,
+    PuzzleIcon,
+    SwordsIcon,
+    CarIcon,
+    TargetIcon,
+    MapIcon,
+    CrownIcon,
+    HammerIcon,
+    UsersIcon,
+    SparklesIcon,
+    BlankIcon,
+    LockIcon,
+    ImageIcon,
+    Web3Icon
+} from '@/components/icons';
+
 // ─── Step Definitions ───
 
 type Step = 'dimension' | 'genre' | 'template' | 'name';
 
-const GENRES: { id: GameGenre; label: string; icon: string; desc: string }[] = [
-    { id: 'platformer', label: 'Platformer', icon: '🏃', desc: 'Jump, run, and dodge obstacles' },
-    { id: 'puzzle', label: 'Puzzle', icon: '🧩', desc: 'Brain teasers and logic games' },
-    { id: 'rpg', label: 'RPG', icon: '⚔️', desc: 'Role-playing adventures' },
-    { id: 'racing', label: 'Racing', icon: '🏎️', desc: 'High-speed racing action' },
-    { id: 'shooter', label: 'Shooter', icon: '🎯', desc: 'Aim, shoot, and survive' },
-    { id: 'adventure', label: 'Adventure', icon: '🗺️', desc: 'Explore and discover' },
-    { id: 'strategy', label: 'Strategy', icon: '♟️', desc: 'Plan, build, and conquer' },
-    { id: 'sandbox', label: 'Sandbox', icon: '🏗️', desc: 'Create without limits' },
-    { id: 'social', label: 'Social', icon: '👥', desc: 'Multiplayer social spaces' },
-    { id: 'other', label: 'Other', icon: '✨', desc: 'Something unique' },
+const GENRES: { id: GameGenre; label: string; icon: React.ReactNode; desc: string }[] = [
+    { id: 'platformer', label: 'Platformer', icon: <PersonIcon size={24} />, desc: 'Jump, run, and dodge obstacles' },
+    { id: 'puzzle', label: 'Puzzle', icon: <PuzzleIcon size={24} />, desc: 'Brain teasers and logic games' },
+    { id: 'rpg', label: 'RPG', icon: <SwordsIcon size={24} />, desc: 'Role-playing adventures' },
+    { id: 'racing', label: 'Racing', icon: <CarIcon size={24} />, desc: 'High-speed racing action' },
+    { id: 'shooter', label: 'Shooter', icon: <TargetIcon size={24} />, desc: 'Aim, shoot, and survive' },
+    { id: 'adventure', label: 'Adventure', icon: <MapIcon size={24} />, desc: 'Explore and discover' },
+    { id: 'strategy', label: 'Strategy', icon: <CrownIcon size={24} />, desc: 'Plan, build, and conquer' },
+    { id: 'sandbox', label: 'Sandbox', icon: <HammerIcon size={24} />, desc: 'Create without limits' },
+    { id: 'social', label: 'Social', icon: <UsersIcon size={24} />, desc: 'Multiplayer social spaces' },
+    { id: 'other', label: 'Other', icon: <SparklesIcon size={24} />, desc: 'Something unique' },
 ];
 
-const TEMPLATES_3D: { id: GameTemplate; label: string; icon: string; desc: string }[] = [
-    { id: 'blank', label: 'Blank Canvas', icon: '⬜', desc: 'Start from scratch' },
-    { id: 'platformer-starter', label: '3D Platformer', icon: '🏃', desc: 'Player, platforms, and collectibles' },
-    { id: 'token-gate-room', label: 'Token Gate Room', icon: '🔐', desc: 'NFT-gated 3D space' },
-    { id: 'nft-gallery', label: 'NFT Gallery', icon: '🖼️', desc: 'Showcase digital art in 3D' },
-    { id: 'multiplayer-arena', label: 'Multiplayer Arena', icon: '⚡', desc: 'Competitive arena setup' },
+const TEMPLATES_3D: { id: GameTemplate; label: string; icon: React.ReactNode; desc: string }[] = [
+    { id: 'blank', label: 'Blank Canvas', icon: <BlankIcon size={24} />, desc: 'Start from scratch' },
+    { id: 'platformer-starter', label: '3D Platformer', icon: <PersonIcon size={24} />, desc: 'Player, platforms, and collectibles' },
+    { id: 'token-gate-room', label: 'Token Gate Room', icon: <LockIcon size={24} />, desc: 'NFT-gated 3D space' },
+    { id: 'nft-gallery', label: 'NFT Gallery', icon: <ImageIcon size={24} />, desc: 'Showcase digital art in 3D' },
+    { id: 'multiplayer-arena', label: 'Multiplayer Arena', icon: <Web3Icon size={24} />, desc: 'Competitive arena setup' },
 ];
 
-const TEMPLATES_2D: { id: GameTemplate; label: string; icon: string; desc: string }[] = [
-    { id: 'blank', label: 'Blank Canvas', icon: '⬜', desc: 'Start from scratch' },
-    { id: 'platformer-starter', label: '2D Platformer', icon: '🕹️', desc: 'Side-scrolling platformer' },
-    { id: 'endless-runner', label: 'Endless Runner', icon: '🏃', desc: 'Auto-run and dodge' },
-    { id: 'nft-gallery', label: 'NFT Showcase', icon: '🖼️', desc: 'Display NFTs in a 2D gallery' },
+const TEMPLATES_2D: { id: GameTemplate; label: string; icon: React.ReactNode; desc: string }[] = [
+    { id: 'blank', label: 'Blank Canvas', icon: <BlankIcon size={24} />, desc: 'Start from scratch' },
+    { id: 'platformer-starter', label: '2D Platformer', icon: <GamepadIcon size={24} />, desc: 'Side-scrolling platformer' },
+    { id: 'endless-runner', label: 'Endless Runner', icon: <PersonIcon size={24} />, desc: 'Auto-run and dodge' },
+    { id: 'nft-gallery', label: 'NFT Showcase', icon: <ImageIcon size={24} />, desc: 'Display NFTs in a 2D gallery' },
 ];
 
 // ─── Styles ───
@@ -120,8 +139,8 @@ const s = {
             ? `rgba(${accent === 'green' ? '20,241,149' : '139,92,246'},0.08)`
             : 'rgba(255,255,255,0.02)',
         border: `1.5px solid ${selected
-                ? accent === 'green' ? 'rgba(20,241,149,0.4)' : 'rgba(139,92,246,0.4)'
-                : 'rgba(255,255,255,0.06)'
+            ? accent === 'green' ? 'rgba(20,241,149,0.4)' : 'rgba(139,92,246,0.4)'
+            : 'rgba(255,255,255,0.06)'
             }`,
         cursor: 'pointer',
         transition: 'all 0.2s ease',
@@ -301,7 +320,7 @@ export default function NewProjectPage() {
                                 style={s.option(config.dimension === '2d', 'green')}
                                 onClick={() => setDimension('2d')}
                             >
-                                <span style={s.iconLarge}>🎮</span>
+                                <span style={s.iconLarge}><GamepadIcon size={40} style={{ color: config.dimension === '2d' ? '#14f195' : '#7a7f8d', transition: 'color 0.2s' }} /></span>
                                 <span style={s.optionLabel}>2D Game</span>
                                 <span style={s.optionDesc}>Sprites, tilemaps, and side-scrolling action</span>
                             </div>
@@ -309,7 +328,7 @@ export default function NewProjectPage() {
                                 style={s.option(config.dimension === '3d')}
                                 onClick={() => setDimension('3d')}
                             >
-                                <span style={s.iconLarge}>🧊</span>
+                                <span style={s.iconLarge}><BoxIcon size={40} style={{ color: config.dimension === '3d' ? '#8b5cf6' : '#7a7f8d', transition: 'color 0.2s' }} /></span>
                                 <span style={s.optionLabel}>3D Game</span>
                                 <span style={s.optionDesc}>Three.js powered immersive 3D worlds</span>
                             </div>

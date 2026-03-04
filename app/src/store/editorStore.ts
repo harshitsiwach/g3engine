@@ -56,6 +56,10 @@ export interface EditorState {
     history: HistoryEntry[];
     historyIndex: number;
 
+    // Tour
+    runTour: boolean;
+    setRunTour: (r: boolean) => void;
+
     // --- Actions ---
 
     // Object CRUD
@@ -146,6 +150,9 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     web3Enabled: false,
     history: [{ objects: [] }],
     historyIndex: 0,
+    runTour: false,
+
+    setRunTour: (r) => set({ runTour: r }),
 
     addObject: (type) => {
         objectCounter++;

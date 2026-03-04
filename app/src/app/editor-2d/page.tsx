@@ -1,8 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useProjectStore } from '@/store/projectStore';
+import { useEditor2DStore } from '@/store/editor2DStore';
+import { TEMPLATES_2D } from '@/lib/templates';
+import { executeCommands } from '@/lib/gameGenerator';
 
 const TopBar2D = dynamic(() => import('@/components/editor-2d/TopBar2D'), { ssr: false });
 const LeftPanel2D = dynamic(() => import('@/components/editor-2d/LeftPanel2D'), { ssr: false });
@@ -11,7 +14,19 @@ const BottomPanel2D = dynamic(() => import('@/components/editor-2d/BottomPanel2D
 const Viewport2D = dynamic(() => import('@/components/editor-2d/Viewport2D'), { ssr: false });
 
 export default function Editor2DPage() {
-    const projectName = useProjectStore((s) => s.config.name);
+    const { config } = useProjectStore();
+
+    // Auto-load template on initial mount
+    useEffect(() => {
+        const store = useEditor2DStore.getState();
+        if (store.sprites.length === 0 && config.template && TEMPLATES_2D[config.template]) {
+            const cmds = TEMPLATES_2D[config.template];
+            if (cmds.length > 0) {
+                console.log(`[Editor 2D] Loading template: ${config.template}`);
+                executeCommands(cmds, '2d');
+            }
+        }
+    }, [config.template]);
 
     return (
         <div className="editor-layout">
@@ -37,7 +52,7 @@ export default function Editor2DPage() {
                 letterSpacing: '0.05em',
                 pointerEvents: 'none',
             }}>
-                🎮 2D Mode {projectName && `— ${projectName}`}
+                🎮 2D Mode {config.name && `— ${config.name}`}
             </div>
 
             <TopBar2D />

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useEditorStore } from '@/store/editorStore';
+import { LayersIcon, FunctionIcon } from '@/components/icons';
 
 const AssetLibrary = dynamic(() => import('@/components/editor/AssetLibrary'), { ssr: false });
 const NodeEditor = dynamic(() => import('@/components/scripting/NodeEditor'), { ssr: false });
@@ -36,14 +37,16 @@ export default function BottomPanel() {
                     <div
                         className={`tab-item ${activeTab === 'assets' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('assets'); setCollapsed(false); }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
                     >
-                        🧩 Assets
+                        <LayersIcon size={14} /> Assets
                     </div>
                     <div
                         className={`tab-item ${activeTab === 'logic' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('logic'); setCollapsed(false); }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
                     >
-                        🔗 Logic
+                        <FunctionIcon size={14} /> Logic
                     </div>
                 </div>
                 <button

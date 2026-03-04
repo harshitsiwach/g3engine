@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { CloseIcon } from '@/components/icons';
 
 // ─── Platform Definitions ───
 
@@ -172,7 +173,7 @@ export default function PublishModal({ isOpen, onClose }: PublishModalProps) {
                         color: '#7a7f8d', cursor: 'pointer', fontSize: 16,
                     }}
                 >
-                    ✕
+                    <CloseIcon size={16} />
                 </button>
 
                 {!published ? (
