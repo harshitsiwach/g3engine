@@ -67,6 +67,7 @@ export interface EditorState {
     removeObject: (id: string) => void;
     duplicateObject: (id: string) => void;
     selectObject: (id: string | null) => void;
+    swapObjectAsset: (id: string, newType: ObjectType) => void;
 
     // Transform
     updateTransform: (id: string, field: 'position' | 'rotation' | 'scale', value: Vec3) => void;
@@ -77,6 +78,7 @@ export interface EditorState {
     // Editor
     togglePlay: () => void;
     toggleWeb3: () => void;
+    toggleVisibility: (id: string) => void;
 
     // History
     pushHistory: () => void;
@@ -202,6 +204,15 @@ export const useEditorStore = create<EditorState>((set, get) => ({
 
     selectObject: (id) => set({ selectedObjectId: id }),
 
+    swapObjectAsset: (id, newType) => set((s) => {
+        const newObjects = s.objects.map((o) => (o.id === id ? { ...o, type: newType } : o));
+        return {
+            objects: newObjects,
+            history: [...s.history.slice(0, s.historyIndex + 1), { objects: newObjects }],
+            historyIndex: s.historyIndex + 1,
+        };
+    }),
+
     updateTransform: (id, field, value) =>
         set((s) => ({
             objects: s.objects.map((o) => (o.id === id ? { ...o, [field]: value } : o)),
@@ -224,6 +235,11 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     togglePlay: () => set((s) => ({ isPlaying: !s.isPlaying, selectedObjectId: null })),
 
     toggleWeb3: () => set((s) => ({ web3Enabled: !s.web3Enabled })),
+
+    toggleVisibility: (id) =>
+        set((s) => ({
+            objects: s.objects.map((o) => (o.id === id ? { ...o, visible: !o.visible } : o)),
+        })),
 
     pushHistory: () =>
         set((s) => ({

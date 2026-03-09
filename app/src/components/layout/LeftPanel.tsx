@@ -59,7 +59,16 @@ export default function LeftPanel() {
                             <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                 {obj.name}
                             </span>
-                            <span className="icon" style={{ opacity: 0.4 }}><EyeIcon /></span>
+                            <span 
+                                className="icon" 
+                                style={{ opacity: obj.visible ? 0.8 : 0.2, cursor: 'pointer' }}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    useEditorStore.getState().toggleVisibility(obj.id);
+                                }}
+                            >
+                                <EyeIcon />
+                            </span>
                             <span
                                 className="icon"
                                 style={{ opacity: 0.4, cursor: 'pointer' }}

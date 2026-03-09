@@ -25,7 +25,7 @@ import {
 
 // ─── Step Definitions ───
 
-type Step = 'dimension' | 'genre' | 'template' | 'name';
+type Step = 'dimension' | 'genre' | 'name';
 
 const GENRES: { id: GameGenre; label: string; icon: React.ReactNode; desc: string }[] = [
     { id: 'platformer', label: 'Platformer', icon: <PersonIcon size={24} />, desc: 'Jump, run, and dodge obstacles' },
@@ -248,7 +248,7 @@ const s = {
 // ─── Progress Bar ───
 
 function ProgressBar({ step }: { step: Step }) {
-    const steps: Step[] = ['dimension', 'genre', 'template', 'name'];
+    const steps: Step[] = ['dimension', 'genre', 'name'];
     const idx = steps.indexOf(step);
     return (
         <div style={s.progressBar}>
@@ -269,9 +269,15 @@ export default function NewProjectPage() {
     const goNext = () => {
         switch (step) {
             case 'dimension': setStep('genre'); break;
-            case 'genre': setStep('template'); break;
-            case 'template': setStep('name'); break;
+            case 'genre': setStep('name'); break;
             case 'name':
+                // Set template based on genre directly
+                if (config.genre === 'platformer') {
+                    setTemplate('endless-runner');
+                } else if (!config.template) {
+                    setTemplate('blank');
+                }
+                
                 // Navigate to appropriate editor
                 if (config.dimension === '2d') {
                     router.push('/editor-2d');
@@ -285,8 +291,7 @@ export default function NewProjectPage() {
     const goBack = () => {
         switch (step) {
             case 'genre': setStep('dimension'); break;
-            case 'template': setStep('genre'); break;
-            case 'name': setStep('template'); break;
+            case 'name': setStep('genre'); break;
         }
     };
 
@@ -294,7 +299,6 @@ export default function NewProjectPage() {
         switch (step) {
             case 'dimension': return config.dimension !== null;
             case 'genre': return config.genre !== null;
-            case 'template': return config.template !== null;
             case 'name': return config.name.trim().length > 0;
         }
     };
@@ -312,16 +316,15 @@ export default function NewProjectPage() {
                 {/* ── Step 1: 2D or 3D ── */}
                 {step === 'dimension' && (
                     <>
-                        <div style={s.stepBadge}>Step 1 of 4</div>
+                        <div style={s.stepBadge}>Step 1 of 3</div>
                         <h1 style={s.title}>What are you building?</h1>
                         <p style={s.subtitle}>Choose your game's dimension. You can always switch later.</p>
                         <div style={s.grid2}>
                             <div
-                                style={s.option(config.dimension === '2d', 'green')}
-                                onClick={() => setDimension('2d')}
+                                style={{ ...s.option(false, 'green'), opacity: 0.5, cursor: 'not-allowed' }}
                             >
-                                <span style={s.iconLarge}><GamepadIcon size={40} style={{ color: config.dimension === '2d' ? '#14f195' : '#7a7f8d', transition: 'color 0.2s' }} /></span>
-                                <span style={s.optionLabel}>2D Game</span>
+                                <span style={s.iconLarge}><GamepadIcon size={40} style={{ color: '#7a7f8d', transition: 'color 0.2s' }} /></span>
+                                <span style={s.optionLabel}>2D Game <span style={{ fontSize: 10, background: 'rgba(20,241,149,0.2)', color: '#14f195', padding: '2px 6px', borderRadius: 4, marginLeft: 4 }}>Coming Soon</span></span>
                                 <span style={s.optionDesc}>Sprites, tilemaps, and side-scrolling action</span>
                             </div>
                             <div
@@ -339,7 +342,7 @@ export default function NewProjectPage() {
                 {/* ── Step 2: Genre ── */}
                 {step === 'genre' && (
                     <>
-                        <div style={s.stepBadge}>Step 2 of 4</div>
+                        <div style={s.stepBadge}>Step 2 of 3</div>
                         <h1 style={s.title}>Pick a genre</h1>
                         <p style={s.subtitle}>This helps us tailor your starting assets and templates.</p>
                         <div style={s.gridGenre}>
@@ -358,32 +361,10 @@ export default function NewProjectPage() {
                     </>
                 )}
 
-                {/* ── Step 3: Template ── */}
-                {step === 'template' && (
-                    <>
-                        <div style={s.stepBadge}>Step 3 of 4</div>
-                        <h1 style={s.title}>Choose a template</h1>
-                        <p style={s.subtitle}>Start with a pre-built setup or a blank canvas.</p>
-                        <div style={s.gridGenre}>
-                            {templates.map((t) => (
-                                <div
-                                    key={t.id}
-                                    style={s.optionSmall(config.template === t.id)}
-                                    onClick={() => setTemplate(t.id)}
-                                >
-                                    <span style={s.iconSmall}>{t.icon}</span>
-                                    <span style={{ fontSize: 12, fontWeight: 600, color: '#f0f0f5' }}>{t.label}</span>
-                                    <span style={{ fontSize: 10, color: '#5a5f6d', textAlign: 'center' }}>{t.desc}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                )}
-
-                {/* ── Step 4: Name ── */}
+                {/* ── Step 3: Name ── */}
                 {step === 'name' && (
                     <>
-                        <div style={s.stepBadge}>Step 4 of 4</div>
+                        <div style={s.stepBadge}>Step 3 of 3</div>
                         <h1 style={s.title}>Name your project</h1>
                         <p style={s.subtitle}>Give your game a name. Don't worry, you can rename it anytime.</p>
                         <input
@@ -417,7 +398,7 @@ export default function NewProjectPage() {
                         }}>
                             <div><strong style={{ color: '#f0f0f5' }}>Dimension:</strong> {config.dimension?.toUpperCase()}</div>
                             <div><strong style={{ color: '#f0f0f5' }}>Genre:</strong> {GENRES.find(g => g.id === config.genre)?.label}</div>
-                            <div><strong style={{ color: '#f0f0f5' }}>Template:</strong> {templates.find(t => t.id === config.template)?.label}</div>
+                            <div><strong style={{ color: '#f0f0f5' }}>Template:</strong> {config.genre === 'platformer' ? 'Platformer' : 'Blank Canvas'}</div>
                         </div>
                     </>
                 )}

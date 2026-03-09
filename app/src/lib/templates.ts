@@ -45,7 +45,27 @@ export const TEMPLATES_3D: Record<GameTemplate, GameCommand[]> = {
         { type: 'add_object', objectType: 'ambientLight', name: 'Ambient' },
         { type: 'enable_web3' }
     ],
-    'endless-runner': [],
+    'endless-runner': [
+        // Environment
+        { type: 'add_object', objectType: 'directionalLight', name: 'Sun', position: { x: 5, y: 10, z: -5 }, rotation: { x: -0.5, y: 0.5, z: 0 } },
+        { type: 'add_object', objectType: 'ambientLight', name: 'Ambient' },
+        
+        // Endless Track
+        { type: 'add_object', objectType: 'box', name: 'Track', position: { x: 0, y: -0.5, z: -20 }, scale: { x: 6, y: 1, z: 60 }, material: { color: '#0d944e', roughness: 0.8, metalness: 0 } },
+        
+        // Player
+        { type: 'add_object', objectType: 'box', name: 'Player', position: { x: 0, y: 0.5, z: 5 }, scale: { x: 1, y: 1, z: 1 }, material: { color: '#3b82f6', roughness: 0.2, metalness: 0.2 } },
+        
+        // Obstacles
+        { type: 'add_object', objectType: 'box', name: 'Obstacle 1', position: { x: 0, y: 0.5, z: 0 }, scale: { x: 2, y: 1, z: 1 }, material: { color: '#ef4444', roughness: 0.5, metalness: 0 } },
+        { type: 'add_object', objectType: 'box', name: 'Obstacle 2', position: { x: -2, y: 0.5, z: -10 }, scale: { x: 2, y: 1, z: 1 }, material: { color: '#ef4444', roughness: 0.5, metalness: 0 } },
+        { type: 'add_object', objectType: 'box', name: 'Obstacle 3', position: { x: 2, y: 0.5, z: -25 }, scale: { x: 2, y: 1, z: 1 }, material: { color: '#ef4444', roughness: 0.5, metalness: 0 } },
+        
+        // Coins (Spheres)
+        { type: 'add_object', objectType: 'sphere', name: 'Coin 1', position: { x: 2, y: 1, z: -2 }, scale: { x: 0.4, y: 0.4, z: 0.4 }, material: { color: '#eab308', emissive: '#eab308', emissiveIntensity: 0.6, roughness: 0.1, metalness: 0.8 } },
+        { type: 'add_object', objectType: 'sphere', name: 'Coin 2', position: { x: 0, y: 1, z: -15 }, scale: { x: 0.4, y: 0.4, z: 0.4 }, material: { color: '#eab308', emissive: '#eab308', emissiveIntensity: 0.6, roughness: 0.1, metalness: 0.8 } },
+        { type: 'add_object', objectType: 'sphere', name: 'Coin 3', position: { x: -2, y: 1, z: -30 }, scale: { x: 0.4, y: 0.4, z: 0.4 }, material: { color: '#eab308', emissive: '#eab308', emissiveIntensity: 0.6, roughness: 0.1, metalness: 0.8 } },
+    ],
 };
 
 export const TEMPLATES_2D: Record<GameTemplate, GameCommand[]> = {
