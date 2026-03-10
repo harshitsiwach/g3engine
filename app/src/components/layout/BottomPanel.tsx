@@ -11,6 +11,12 @@ const NodeEditor = dynamic(() => import('@/components/scripting/NodeEditor'), { 
 
 type Tab = 'swap' | 'inputs' | 'logic';
 
+const tabs: { id: Tab; icon: React.ReactNode; label: string; color: string }[] = [
+    { id: 'swap', icon: <LayersIcon size={14} />, label: 'Assets', color: '#8b5cf6' },
+    { id: 'inputs', icon: <GamepadIcon size={14} />, label: 'Inputs', color: '#14f195' },
+    { id: 'logic', icon: <FunctionIcon size={14} />, label: 'Logic', color: '#38bdf8' },
+];
+
 const ChevronDownIcon = () => (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="6 9 12 15 18 9" />
@@ -35,27 +41,27 @@ export default function BottomPanel() {
             {/* Tab bar */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div className="tab-bar" style={{ flex: 1 }}>
-                    <div
-                        className={`tab-item ${activeTab === 'swap' ? 'active' : ''}`}
-                        onClick={() => { setActiveTab('swap'); setCollapsed(false); }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                    >
-                        <LayersIcon size={14} /> Swap
-                    </div>
-                    <div
-                        className={`tab-item ${activeTab === 'inputs' ? 'active' : ''}`}
-                        onClick={() => { setActiveTab('inputs'); setCollapsed(false); }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                    >
-                        <GamepadIcon size={14} /> Inputs
-                    </div>
-                    <div
-                        className={`tab-item ${activeTab === 'logic' ? 'active' : ''}`}
-                        onClick={() => { setActiveTab('logic'); setCollapsed(false); }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                    >
-                        <FunctionIcon size={14} /> Logic
-                    </div>
+                    {tabs.map((tab) => {
+                        const isActive = activeTab === tab.id;
+                        return (
+                            <div
+                                key={tab.id}
+                                className={`tab-item ${isActive ? 'active' : ''}`}
+                                onClick={() => { setActiveTab(tab.id); setCollapsed(false); }}
+                                style={{
+                                    display: 'flex', alignItems: 'center', gap: '6px',
+                                    color: isActive ? tab.color : undefined,
+                                    borderBottomColor: isActive ? tab.color : 'transparent',
+                                    textShadow: isActive ? `0 0 12px ${tab.color}40` : 'none',
+                                }}
+                            >
+                                <span style={{ color: isActive ? tab.color : 'inherit', transition: 'color 0.15s' }}>
+                                    {tab.icon}
+                                </span>
+                                {tab.label}
+                            </div>
+                        );
+                    })}
                 </div>
                 <button
                     className="btn btn-icon"
