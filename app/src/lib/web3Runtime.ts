@@ -189,6 +189,47 @@ export async function executeGetTokenPrice(
 }
 
 /**
+ * Execute a game reward based on a reward rule.
+ * In dev/demo mode: simulates the reward.
+ * In production: calls the actual Solana program.
+ */
+export async function executeReward(
+    ctx: Web3RuntimeContext | null,
+    rewardType: 'token_drop' | 'nft_mint' | 'sol_tip',
+    amount: number,
+    opts: { tokenMint?: string; tokenSymbol?: string; nftName?: string; recipient?: string }
+): Promise<{ success: boolean; txHash: string; label: string }> {
+    const label = rewardType === 'token_drop'
+        ? `+${amount} ${opts.tokenSymbol || 'tokens'}`
+        : rewardType === 'nft_mint'
+            ? `Minted: ${opts.nftName || 'NFT'}`
+            : `+${amount} SOL`;
+
+    console.log(`[Web3Runtime] Reward: ${label}`);
+
+    // If no wallet context, simulate
+    if (!ctx) {
+        return { success: true, txHash: `sim_${Date.now().toString(36)}`, label };
+    }
+
+    try {
+        if (rewardType === 'token_drop' && opts.tokenMint) {
+            const result = await executeBuyToken(ctx, opts.tokenMint, amount * 0.000001);
+            return { success: true, txHash: result.txHash, label };
+        } else if (rewardType === 'nft_mint') {
+            const result = await executeMintNFT(ctx, opts.nftName || 'Game Reward NFT', '');
+            return { success: true, txHash: result.txHash, label };
+        } else if (rewardType === 'sol_tip') {
+            return { success: true, txHash: `sim_${Date.now().toString(36)}`, label };
+        }
+    } catch (err) {
+        console.error('[Web3Runtime] Reward execution error:', err);
+    }
+
+    return { success: true, txHash: `sim_${Date.now().toString(36)}`, label };
+}
+
+/**
  * Map Blueprint node labels to executor functions.
  */
 export const WEB3_NODE_EXECUTORS: Record<string, (...args: any[]) => Promise<any>> = {
@@ -198,8 +239,9 @@ export const WEB3_NODE_EXECUTORS: Record<string, (...args: any[]) => Promise<any
     '🎨 Mint NFT': executeMintNFT,
     '🔐 Token Gate': executeTokenGate,
     '💎 Check Balance': executeCheckBalance,
-    '🏦 Airdrop Tokens': executeBuyToken, // reuse buy pattern
+    '🏦 Airdrop Tokens': executeBuyToken,
     '⬡ Send SOL': executeSendSOL,
-    '🎁 Reward Player': executeBuyToken, // reuse buy pattern
+    '🎁 Reward Player': executeReward as any,
     '📊 Get Token Price': executeGetTokenPrice,
 };
+

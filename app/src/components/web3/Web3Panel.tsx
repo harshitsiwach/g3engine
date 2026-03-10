@@ -6,11 +6,13 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import TokenLaunchModal from './TokenLaunchModal';
 import MintNFTModal from './MintNFTModal';
+import Web3RewardsPanel from './Web3RewardsPanel';
 
 const TABS = [
     { id: 'tokens' as const, icon: '🪙', label: 'Tokens' },
     { id: 'nfts' as const, icon: '🎨', label: 'NFTs' },
     { id: 'economy' as const, icon: '💰', label: 'Economy' },
+    { id: 'rewards' as const, icon: '🎮', label: 'Rewards' },
     { id: 'settings' as const, icon: '⚙️', label: 'Settings' },
 ];
 
@@ -106,6 +108,9 @@ export default function Web3Panel() {
                             )}
                             {activeTab === 'economy' && (
                                 <EconomyTab economy={economy} updateEconomy={updateEconomy} tokens={tokens} />
+                            )}
+                            {activeTab === 'rewards' && (
+                                <Web3RewardsPanel />
                             )}
                             {activeTab === 'settings' && (
                                 <SettingsTab

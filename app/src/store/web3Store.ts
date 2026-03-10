@@ -63,7 +63,7 @@ interface Web3State {
 
     // UI
     web3PanelOpen: boolean;
-    activeTab: 'tokens' | 'nfts' | 'economy' | 'settings';
+    activeTab: 'tokens' | 'nfts' | 'economy' | 'rewards' | 'settings';
 
     // --- Actions ---
     setNetwork: (network: SolanaNetwork) => void;

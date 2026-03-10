@@ -12,6 +12,8 @@ import {
 } from '@react-three/drei';
 import * as THREE from 'three';
 import { useEditorStore, SceneObject, ObjectType } from '@/store/editorStore';
+import { useGameRewardStore } from '@/store/gameRewardStore';
+import GameHUD from '@/components/editor/GameHUD';
 
 // ---------- Scene Object Renderer ----------
 
@@ -228,10 +230,15 @@ function KeyboardHandler() {
 function GameLogicRunner() {
     const { isPlaying } = useEditorStore();
     const { scene, camera } = useThree();
+    const {
+        incrementCoins, incrementDodges, setDistance, triggerEvent, resetRuntime, rewardsEnabled,
+    } = useGameRewardStore();
     
     const keys = useRef({ a: false, d: false, arrowleft: false, arrowright: false });
     const initialPositions = useRef<Record<string, THREE.Vector3>>({});
     const initialCamera = useRef<{ pos: THREE.Vector3, rot: THREE.Euler } | null>(null);
+    const startZ = useRef(0);
+    const dodgedSet = useRef<Set<string>>(new Set());
 
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
@@ -252,15 +259,20 @@ function GameLogicRunner() {
 
     useEffect(() => {
         if (isPlaying) {
+            // Reset reward counters
+            resetRuntime();
+            dodgedSet.current.clear();
             // Save initial positions right as play mode begins
             initialPositions.current = {};
             scene.traverse((obj) => {
                 if (obj.name && obj.type === 'Mesh') {
                     initialPositions.current[obj.uuid] = obj.position.clone();
-                    if (obj.name.startsWith('Coin')) obj.visible = true; // Ensure visibility
+                    if (obj.name.startsWith('Coin')) obj.visible = true;
                 }
             });
             initialCamera.current = { pos: camera.position.clone(), rot: camera.rotation.clone() };
+            const player = scene.children.find(c => c.name === 'Player');
+            if (player) startZ.current = player.position.z;
         } else {
             // Restore positions
             scene.traverse((obj) => {
@@ -296,6 +308,9 @@ function GameLogicRunner() {
         }
         player.position.x = THREE.MathUtils.clamp(player.position.x, -2.5, 2.5);
 
+        // Track distance
+        setDistance(Math.abs(player.position.z - startZ.current));
+
         // 3. Spin coins & check for collection
         const coins = scene.children.filter(c => c.name.startsWith('Coin')) as THREE.Mesh[];
         coins.forEach(coin => {
@@ -306,21 +321,26 @@ function GameLogicRunner() {
             if (coin.visible) {
                 const dist = player.position.distanceTo(coin.position);
                 if (dist < 1.0) {
-                    coin.visible = false; // "Collect"
-                    // Optional: play sound here
+                    coin.visible = false;
+                    incrementCoins();
+                    if (rewardsEnabled) triggerEvent('coin_collected');
                 }
             }
         });
 
-        // 4. Obstacle collision
+        // 4. Obstacle collision + dodging
         const obstacles = scene.children.filter(c => c.name.startsWith('Obstacle')) as THREE.Mesh[];
         obstacles.forEach(obs => {
             const dist = player.position.distanceTo(obs.position);
-            // Very simple distance-based collision box
             if (dist < 1.3) {
-                // Bounce back penalty
                 player.position.z += 3;
-                player.position.x += (Math.random() - 0.5) * 2; // slight knock to side
+                player.position.x += (Math.random() - 0.5) * 2;
+                dodgedSet.current.delete(obs.uuid); // reset dodge tracking on hit
+            } else if (player.position.z < obs.position.z - 2 && !dodgedSet.current.has(obs.uuid)) {
+                // Player passed the obstacle without collision
+                dodgedSet.current.add(obs.uuid);
+                incrementDodges();
+                if (rewardsEnabled) triggerEvent('obstacle_dodged');
             }
         });
 
@@ -443,6 +463,9 @@ export default function Viewport() {
                     </GizmoHelper>
                 )}
             </Canvas>
+
+            {/* Game HUD (score, coins, reward toasts) */}
+            <GameHUD />
 
             {/* Play Mode Overlay */}
             {isPlaying && (
