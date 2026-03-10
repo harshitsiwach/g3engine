@@ -3,16 +3,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAIStore, PROVIDERS, AIProvider } from '@/store/aiStore';
 import { parseAIResponse, executeCommands } from '@/lib/gameGenerator';
+import {
+    PersonRunIcon, RocketIcon, PuzzleIcon, CastleIcon, GamepadIcon, CoinsIcon,
+    SparklesIcon, SettingsIcon, TrashIcon, CloseIcon, HammerIcon,
+} from '@/components/icons';
 
 // ─── Quick Prompts ───
 
-const QUICK_PROMPTS = [
-    { icon: '🏃', label: 'Platformer', prompt: 'Build a 3D platformer with a player, ground, 3 floating platforms, and collectible coins' },
-    { icon: '🚀', label: 'Space Shooter', prompt: 'Build a space shooter scene with a spaceship, asteroids, and stars' },
-    { icon: '🧩', label: 'Puzzle', prompt: 'Build a colorful 3D puzzle scene with different shaped blocks arranged as a challenge' },
-    { icon: '🏰', label: 'RPG Scene', prompt: 'Build a medieval RPG scene with a castle tower, trees, a bridge, and torches' },
-    { icon: '🎮', label: 'Arcade', prompt: 'Build a retro arcade game scene with a paddle, ball, and brick wall' },
-    { icon: '🪙', label: 'Web3 Game', prompt: 'Build a token-gated treasure room with glowing chests and enable Web3 features' },
+const QUICK_PROMPTS: { icon: React.ReactNode; label: string; prompt: string }[] = [
+    { icon: <PersonRunIcon size={20} style={{ color: '#14f195' }} />, label: 'Platformer', prompt: 'Build a 3D platformer with a player, ground, 3 floating platforms, and collectible coins' },
+    { icon: <RocketIcon size={20} style={{ color: '#38bdf8' }} />, label: 'Space Shooter', prompt: 'Build a space shooter scene with a spaceship, asteroids, and stars' },
+    { icon: <PuzzleIcon size={20} style={{ color: '#f59e0b' }} />, label: 'Puzzle', prompt: 'Build a colorful 3D puzzle scene with different shaped blocks arranged as a challenge' },
+    { icon: <CastleIcon size={20} style={{ color: '#a78bfa' }} />, label: 'RPG Scene', prompt: 'Build a medieval RPG scene with a castle tower, trees, a bridge, and torches' },
+    { icon: <GamepadIcon size={20} style={{ color: '#ec4899' }} />, label: 'Arcade', prompt: 'Build a retro arcade game scene with a paddle, ball, and brick wall' },
+    { icon: <CoinsIcon size={20} style={{ color: '#14f195' }} />, label: 'Web3 Game', prompt: 'Build a token-gated treasure room with glowing chests and enable Web3 features' },
 ];
 
 export default function AIChatPanel() {
@@ -114,7 +118,7 @@ export default function AIChatPanel() {
                         width: 28, height: 28, borderRadius: 8,
                         background: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14,
-                    }}>✨</div>
+                    }}><SparklesIcon size={16} /></div>
                     <div>
                         <span style={{ fontWeight: 700, fontSize: 14, color: '#fff' }}>AI Assistant</span>
                         <div style={{ fontSize: 9, color: providerConfig.color, fontWeight: 600, marginTop: 1 }}>
@@ -123,9 +127,9 @@ export default function AIChatPanel() {
                     </div>
                 </div>
                 <div style={{ display: 'flex', gap: 4 }}>
-                    <button onClick={() => setShowSettings(!showSettings)} style={iconBtnStyle} title="Settings">⚙️</button>
-                    <button onClick={clearChat} style={iconBtnStyle} title="Clear chat">🗑️</button>
-                    <button onClick={() => useAIStore.getState().toggleOpen()} style={iconBtnStyle} title="Close">✕</button>
+                    <button onClick={() => setShowSettings(!showSettings)} style={iconBtnStyle} title="Settings"><SettingsIcon size={14} /></button>
+                    <button onClick={clearChat} style={iconBtnStyle} title="Clear chat"><TrashIcon size={14} /></button>
+                    <button onClick={() => useAIStore.getState().toggleOpen()} style={iconBtnStyle} title="Close"><CloseIcon size={14} /></button>
                 </div>
             </div>
 
@@ -283,7 +287,7 @@ export default function AIChatPanel() {
             <div ref={scrollRef} style={messagesStyle}>
                 {messages.length === 0 && (
                     <div style={{ padding: '20px 16px', textAlign: 'center' }}>
-                        <div style={{ fontSize: 40, marginBottom: 12 }}>🎮</div>
+                        <div style={{ fontSize: 40, marginBottom: 12 }}><GamepadIcon size={40} /></div>
                         <p style={{ fontSize: 14, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>
                             Build games with AI
                         </p>
@@ -330,7 +334,7 @@ export default function AIChatPanel() {
                             padding: '10px 18px', borderRadius: '14px 14px 14px 4px',
                             background: 'rgba(255,255,255,0.06)', fontSize: 13,
                         }}>
-                            <span className="ai-typing">✨ Building</span>
+                            <span className="ai-typing"><SparklesIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} /> Building</span>
                             <style>{`
                                 .ai-typing::after { content: ''; animation: dots 1.5s infinite; }
                                 @keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
@@ -372,7 +376,7 @@ export default function AIChatPanel() {
                     onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input); }
                     }}
-                    placeholder={canSend ? 'Describe what to build...' : `Set ${providerConfig.label} key in ⚙️`}
+                    placeholder={canSend ? 'Describe what to build...' : `Set ${providerConfig.label} key in settings`}
                     disabled={isLoading}
                     style={{
                         flex: 1, padding: '10px 12px', borderRadius: 10,
@@ -406,7 +410,7 @@ export default function AIChatPanel() {
 function renderMessageContent(content: string) {
     const clean = content.replace(/```json[\s\S]*?```/g, '');
     const trimmed = clean.trim();
-    if (!trimmed) return <span style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>🛠️ Building your game...</span>;
+    if (!trimmed) return <span style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>Building your game...</span>;
     return trimmed;
 }
 

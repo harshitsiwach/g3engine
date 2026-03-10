@@ -7,13 +7,16 @@ import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import TokenLaunchModal from './TokenLaunchModal';
 import MintNFTModal from './MintNFTModal';
 import Web3RewardsPanel from './Web3RewardsPanel';
+import {
+    CoinsIcon, PaletteIcon, BarChartIcon, GamepadIcon, SettingsIcon, LinkIcon, RocketIcon, LockIcon
+} from '@/components/icons';
 
-const TABS = [
-    { id: 'tokens' as const, icon: '🪙', label: 'Tokens' },
-    { id: 'nfts' as const, icon: '🎨', label: 'NFTs' },
-    { id: 'economy' as const, icon: '💰', label: 'Economy' },
-    { id: 'rewards' as const, icon: '🎮', label: 'Rewards' },
-    { id: 'settings' as const, icon: '⚙️', label: 'Settings' },
+const TABS: { id: 'tokens' | 'nfts' | 'economy' | 'rewards' | 'settings'; icon: React.ReactNode; label: string }[] = [
+    { id: 'tokens', icon: <CoinsIcon size={16} />, label: 'Tokens' },
+    { id: 'nfts', icon: <PaletteIcon size={16} />, label: 'NFTs' },
+    { id: 'economy', icon: <BarChartIcon size={16} />, label: 'Economy' },
+    { id: 'rewards', icon: <GamepadIcon size={16} />, label: 'Rewards' },
+    { id: 'settings', icon: <SettingsIcon size={16} />, label: 'Settings' },
 ];
 
 export default function Web3Panel() {
@@ -79,7 +82,7 @@ export default function Web3Panel() {
                             display: 'flex', flexDirection: 'column', alignItems: 'center',
                             justifyContent: 'center', height: '100%', gap: 16, padding: 20,
                         }}>
-                            <div style={{ fontSize: 48, opacity: 0.3 }}>🔗</div>
+                            <div style={{ fontSize: 48, opacity: 0.3, marginBottom: 16 }}><LinkIcon size={48} /></div>
                             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>
                                 Connect your wallet to access Web3 features
                             </p>
@@ -140,7 +143,9 @@ function TokensTab({ tokens, onLaunchToken }: { tokens: any[]; onLaunchToken: ()
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <button onClick={onLaunchToken} style={actionBtnStyle}>
-                🚀 Launch Token on Pump.fun
+                <span style={{ display: 'flex', alignItems: 'center', gap: 6, justifyContent: 'center' }}>
+                    <RocketIcon size={16} /> Launch Token on Pump.fun
+                </span>
             </button>
 
             <h4 style={sectionTitle}>Your Tokens</h4>
@@ -153,7 +158,7 @@ function TokensTab({ tokens, onLaunchToken }: { tokens: any[]; onLaunchToken: ()
                             {t.imageUri ? (
                                 <img src={t.imageUri} alt={t.symbol} style={{ width: 28, height: 28, borderRadius: '50%' }} />
                             ) : (
-                                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(20,241,149,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>🪙</div>
+                                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(20,241,149,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CoinsIcon size={14} style={{ color: '#14f195' }} /></div>
                             )}
                             <div>
                                 <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{t.symbol}</div>
@@ -179,7 +184,9 @@ function NFTsTab({ nfts, onMintNFT }: { nfts: any[]; onMintNFT: () => void }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <button onClick={onMintNFT} style={actionBtnStyle}>
-                🎨 Mint Game NFT
+                <span style={{ display: 'flex', alignItems: 'center', gap: 6, justifyContent: 'center' }}>
+                    <PaletteIcon size={16} /> Mint Game NFT
+                </span>
             </button>
             <button style={{ ...actionBtnStyle, background: 'rgba(153,69,255,0.1)', borderColor: 'rgba(153,69,255,0.3)' }}>
                 🔐 Add NFT Gate to Scene

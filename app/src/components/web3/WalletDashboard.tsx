@@ -2,6 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useWeb3Store, TokenInfo, NFTInfo, Web3Transaction } from '@/store/web3Store';
+import {
+    SolanaIcon, HexagonIcon, CoinsIcon, ZapIcon, GlobeIcon, PersonRunIcon,
+    RocketIcon, PaletteIcon, ArrowUpRightIcon, ArrowRightLeftIcon, GiftIcon,
+    DiamondIcon, SettingsIcon, SwordsIcon, ShieldIcon, ScrollIcon, ArrowDownLeftIcon,
+} from '@/components/icons';
 
 // ─── Types ───
 
@@ -37,16 +42,16 @@ const CHART_DATA = [12, 15, 14, 18, 22, 20, 25, 28, 26, 32, 35, 38, 36, 42, 45, 
 
 // ─── Token Emoji Map ───
 
-const TOKEN_EMOJI: Record<string, string> = {
-    SOL: '◎', G3: '⬡', USDC: '💲', RAY: '☀️', JUP: '🪐', BONK: '🐕',
+const TOKEN_EMOJI: Record<string, React.ReactNode> = {
+    SOL: <SolanaIcon size={14} />, G3: <HexagonIcon size={14} style={{ color: '#8b5cf6' }} />, USDC: <CoinsIcon size={14} style={{ color: '#3b82f6' }} />, RAY: <ZapIcon size={14} style={{ color: '#eab308' }} />, JUP: <GlobeIcon size={14} style={{ color: '#10b981' }} />, BONK: <PersonRunIcon size={14} style={{ color: '#f97316' }} />,
 };
 
 const RARITY_COLORS: Record<string, string> = {
     Legendary: '#f59e0b', Epic: '#a855f7', Rare: '#3b82f6', Common: '#6b7280',
 };
 
-const TX_ICONS: Record<string, string> = {
-    token_launch: '🚀', mint_nft: '🎨', buy: '💰', sell: '📤', transfer: '↗️', airdrop: '🪂',
+const TX_ICONS: Record<string, React.ReactNode> = {
+    token_launch: <RocketIcon size={16} />, mint_nft: <PaletteIcon size={16} />, buy: <CoinsIcon size={16} />, sell: <ArrowUpRightIcon size={16} />, transfer: <ArrowRightLeftIcon size={16} />, airdrop: <GiftIcon size={16} />,
 };
 
 // ─── Main Component ───
@@ -76,7 +81,7 @@ export default function WalletDashboard() {
             {/* Header */}
             <div style={headerStyle}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg, #8b5cf6, #14f195)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 700 }}>⬡</div>
+                    <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg, #8b5cf6, #14f195)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 700 }}><HexagonIcon size={18} style={{ color: '#fff' }} /></div>
                     <span style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>G3 Wallet</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -108,10 +113,10 @@ export default function WalletDashboard() {
             {/* Bottom Nav */}
             <div style={bottomNavStyle}>
                 {([
-                    { id: 'portfolio' as Screen, icon: '💎', label: 'Portfolio' },
-                    { id: 'nfts' as Screen, icon: '🎨', label: 'NFTs' },
-                    { id: 'activity' as Screen, icon: '⚡', label: 'Activity' },
-                    { id: 'settings' as Screen, icon: '⚙️', label: 'Settings' },
+                    { id: 'portfolio' as Screen, icon: <DiamondIcon size={20} />, label: 'Portfolio' },
+                    { id: 'nfts' as Screen, icon: <PaletteIcon size={20} />, label: 'NFTs' },
+                    { id: 'activity' as Screen, icon: <ZapIcon size={20} />, label: 'Activity' },
+                    { id: 'settings' as Screen, icon: <SettingsIcon size={20} />, label: 'Settings' },
                 ]).map((tab) => (
                     <button
                         key={tab.id}
@@ -198,10 +203,10 @@ function PortfolioScreen({ address, balance, totalUsd, tokens, network }: {
             {/* Quick Actions */}
             <div style={{ display: 'flex', gap: 10, margin: '16px 0' }}>
                 {[
-                    { icon: '↗️', label: 'Send' },
-                    { icon: '↙️', label: 'Receive' },
-                    { icon: '🔄', label: 'Swap' },
-                    { icon: '🚀', label: 'Launch' },
+                    { icon: <ArrowUpRightIcon size={18} />, label: 'Send' },
+                    { icon: <ArrowDownLeftIcon size={18} />, label: 'Receive' },
+                    { icon: <ArrowRightLeftIcon size={18} />, label: 'Swap' },
+                    { icon: <RocketIcon size={18} />, label: 'Launch' },
                 ].map((a) => (
                     <div key={a.label} style={quickActionStyle}>
                         <span style={{ fontSize: 18 }}>{a.icon}</span>
@@ -223,7 +228,7 @@ function PortfolioScreen({ address, balance, totalUsd, tokens, network }: {
                                 fontSize: 16,
                                 boxShadow: `0 0 12px ${getTokenGradient(t.symbol)[0]}44`,
                             }}>
-                                {TOKEN_EMOJI[t.symbol] || '🪙'}
+                                {TOKEN_EMOJI[t.symbol] || <CoinsIcon size={16} />}
                             </div>
                             <div>
                                 <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{t.name}</div>
@@ -264,7 +269,7 @@ function NFTScreen({ nfts }: { nfts: NFTInfo[] }) {
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 fontSize: 40, marginBottom: 10,
                             }}>
-                                {nft.name.includes('Sword') ? '⚔️' : nft.name.includes('Shield') ? '🛡️' : nft.name.includes('Explorer') ? '🧑‍🚀' : '🐉'}
+                                {nft.name.includes('Sword') ? <SwordsIcon size={24} /> : nft.name.includes('Shield') ? <ShieldIcon size={24} /> : nft.name.includes('Explorer') ? <RocketIcon size={24} /> : <ZapIcon size={24} />}
                             </div>
                             <div style={{ fontSize: 12, fontWeight: 600, color: '#fff', marginBottom: 4 }}>{nft.name}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -293,7 +298,7 @@ function ActivityScreen({ txs }: { txs: Web3Transaction[] }) {
                         border: `1px solid ${tx.status === 'confirmed' ? 'rgba(20,241,149,0.15)' : 'rgba(251,191,36,0.15)'}`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16,
                     }}>
-                        {TX_ICONS[tx.type] || '📝'}
+                        {TX_ICONS[tx.type] || <ScrollIcon size={16} />}
                     </div>
                     <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 12, fontWeight: 600, color: '#fff' }}>{tx.description}</div>

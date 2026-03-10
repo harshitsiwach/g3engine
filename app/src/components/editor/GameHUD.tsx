@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useGameRewardStore, RewardLogEntry } from '@/store/gameRewardStore';
 import { useEditorStore } from '@/store/editorStore';
+import { TrophyIcon, CoinsIcon, RulerIcon, ZapIcon, PaletteIcon, SolanaIcon } from '@/components/icons';
 
 // ─── Main HUD ───
 
@@ -53,7 +54,7 @@ export default function GameHUD() {
             }}>
                 {/* Score */}
                 <div style={statPillStyle}>
-                    <span style={{ fontSize: 14 }}>🏆</span>
+                    <TrophyIcon size={14} style={{ color: '#fbbf24' }} />
                     <div>
                         <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.35)', fontWeight: 700, textTransform: 'uppercase' }}>Score</div>
                         <div style={{ fontSize: 16, fontWeight: 900, color: '#fff', lineHeight: 1 }}>{score}</div>
@@ -62,7 +63,7 @@ export default function GameHUD() {
 
                 {/* Coins */}
                 <div style={statPillStyle}>
-                    <span style={{ fontSize: 14, display: 'inline-block', animation: 'coinSpin 2s linear infinite' }}>🪙</span>
+                    <CoinsIcon size={14} style={{ color: '#fbbf24', display: 'inline-block', animation: 'coinSpin 2s linear infinite' }} />
                     <div>
                         <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.35)', fontWeight: 700, textTransform: 'uppercase' }}>Coins</div>
                         <div style={{ fontSize: 16, fontWeight: 900, color: '#eab308', lineHeight: 1 }}>{coinsCollected}</div>
@@ -71,7 +72,7 @@ export default function GameHUD() {
 
                 {/* Distance */}
                 <div style={statPillStyle}>
-                    <span style={{ fontSize: 14 }}>📏</span>
+                    <RulerIcon size={14} style={{ color: '#38bdf8' }} />
                     <div>
                         <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.35)', fontWeight: 700, textTransform: 'uppercase' }}>Distance</div>
                         <div style={{ fontSize: 16, fontWeight: 900, color: '#3b82f6', lineHeight: 1 }}>{Math.floor(distance)}m</div>
@@ -80,7 +81,7 @@ export default function GameHUD() {
 
                 {/* Dodges */}
                 <div style={statPillStyle}>
-                    <span style={{ fontSize: 14 }}>⚡</span>
+                    <ZapIcon size={14} style={{ color: '#a78bfa' }} />
                     <div>
                         <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.35)', fontWeight: 700, textTransform: 'uppercase' }}>Dodges</div>
                         <div style={{ fontSize: 16, fontWeight: 900, color: '#22c55e', lineHeight: 1 }}>{obstaclesDodged}</div>
@@ -134,7 +135,7 @@ function RewardToast({ toast, index }: { toast: RewardLogEntry; index: number })
     const bg = isToken ? 'rgba(20,241,149,0.12)' : isNft ? 'rgba(139,92,246,0.12)' : 'rgba(245,158,11,0.12)';
     const border = isToken ? 'rgba(20,241,149,0.3)' : isNft ? 'rgba(139,92,246,0.3)' : 'rgba(245,158,11,0.3)';
     const color = isToken ? '#14f195' : isNft ? '#a78bfa' : '#f59e0b';
-    const icon = isToken ? '🪙' : isNft ? '🎨' : '◎';
+    const icon = isToken ? <CoinsIcon size={16} style={{ color: '#fbbf24' }} /> : isNft ? <PaletteIcon size={16} style={{ color: '#ec4899' }} /> : <SolanaIcon size={16} style={{ color: '#14f195' }} />;
 
     return (
         <div style={{

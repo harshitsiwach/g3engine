@@ -7,29 +7,33 @@ import {
     RewardType,
     RewardRule,
 } from '@/store/gameRewardStore';
+import {
+    CoinsIcon, PersonRunIcon, TrophyIcon, TargetIcon, SkullIcon,
+    PaletteIcon, SolanaIcon, GamepadIcon, GiftIcon, CrosshairIcon,
+} from '@/components/icons';
 
 // ─── Constants ───
 
-const EVENT_OPTIONS: { value: GameEvent; label: string; icon: string; desc: string; color: string }[] = [
-    { value: 'coin_collected', label: 'Coin Collected', icon: '🪙', desc: 'Player picks up an in-game coin', color: '#eab308' },
-    { value: 'obstacle_dodged', label: 'Obstacle Dodged', icon: '🏃', desc: 'Player avoids an obstacle', color: '#22c55e' },
-    { value: 'score_milestone', label: 'Score Milestone', icon: '🏆', desc: 'Player reaches a score threshold', color: '#f59e0b' },
-    { value: 'level_complete', label: 'Level Complete', icon: '🎯', desc: 'Player finishes a level', color: '#3b82f6' },
-    { value: 'game_over', label: 'Game Over', icon: '💀', desc: 'Play session ends', color: '#ef4444' },
+const EVENT_OPTIONS: { value: GameEvent; label: string; icon: React.ReactNode; desc: string; color: string }[] = [
+    { value: 'coin_collected', label: 'Coin Collected', icon: <CoinsIcon size={16} />, desc: 'Player picks up an in-game coin', color: '#eab308' },
+    { value: 'obstacle_dodged', label: 'Obstacle Dodged', icon: <PersonRunIcon size={16} />, desc: 'Player avoids an obstacle', color: '#22c55e' },
+    { value: 'score_milestone', label: 'Score Milestone', icon: <TrophyIcon size={16} />, desc: 'Player reaches a score threshold', color: '#f59e0b' },
+    { value: 'level_complete', label: 'Level Complete', icon: <TargetIcon size={16} />, desc: 'Player finishes a level', color: '#3b82f6' },
+    { value: 'game_over', label: 'Game Over', icon: <SkullIcon size={16} />, desc: 'Play session ends', color: '#ef4444' },
 ];
 
-const REWARD_OPTIONS: { value: RewardType; label: string; icon: string; color: string }[] = [
-    { value: 'token_drop', label: 'Drop Tokens', icon: '🪙', color: '#14f195' },
-    { value: 'nft_mint', label: 'Mint NFT', icon: '🎨', color: '#a78bfa' },
-    { value: 'sol_tip', label: 'Send SOL', icon: '◎', color: '#f59e0b' },
+const REWARD_OPTIONS: { value: RewardType; label: string; icon: React.ReactNode; color: string }[] = [
+    { value: 'token_drop', label: 'Drop Tokens', icon: <CoinsIcon size={16} />, color: '#14f195' },
+    { value: 'nft_mint', label: 'Mint NFT', icon: <PaletteIcon size={16} />, color: '#a78bfa' },
+    { value: 'sol_tip', label: 'Send SOL', icon: <SolanaIcon size={16} />, color: '#f59e0b' },
 ];
 
 const PRESET_TEMPLATES = [
-    { title: '🏃 Endless Runner', desc: 'Coins → tokens, dodges → bonus', rules: [
+    { title: 'Endless Runner', icon: <PersonRunIcon size={14} />, desc: 'Coins → tokens, dodges → bonus', rules: [
         { event: 'coin_collected' as GameEvent, rewardType: 'token_drop' as RewardType, amount: 10, tokenSymbol: 'G3', cooldownMs: 0 },
         { event: 'obstacle_dodged' as GameEvent, rewardType: 'token_drop' as RewardType, amount: 5, tokenSymbol: 'G3', cooldownMs: 2000 },
     ]},
-    { title: '🏆 Achievement Hunter', desc: 'Score milestones → unique NFTs', rules: [
+    { title: 'Achievement Hunter', icon: <TrophyIcon size={14} />, desc: 'Score milestones → unique NFTs', rules: [
         { event: 'score_milestone' as GameEvent, rewardType: 'nft_mint' as RewardType, amount: 1, nftName: 'Achievement Badge', milestoneThreshold: 100 },
         { event: 'level_complete' as GameEvent, rewardType: 'token_drop' as RewardType, amount: 50, tokenSymbol: 'G3' },
     ]},
@@ -103,7 +107,7 @@ export default function Web3RewardsPanel() {
             }}>
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                        <span style={{ fontSize: 22, animation: 'rwdFloat 2s ease infinite' }}>🎮</span>
+                        <GamepadIcon size={22} style={{ animation: 'rwdFloat 2s ease infinite' }} />
                         <h3 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
                             Game Rewards
                         </h3>
@@ -137,10 +141,10 @@ export default function Web3RewardsPanel() {
                     display: 'flex', gap: 6, marginBottom: 14,
                 }}>
                     {[
-                        { icon: '🪙', val: coinsCollected, label: 'Coins' },
-                        { icon: '🏃', val: obstaclesDodged, label: 'Dodges' },
-                        { icon: '🏆', val: score, label: 'Score' },
-                        { icon: '🎁', val: rewardLog.length, label: 'Rewards' },
+                        { icon: <CoinsIcon size={10} />, val: coinsCollected, label: 'Coins' },
+                        { icon: <PersonRunIcon size={10} />, val: obstaclesDodged, label: 'Dodges' },
+                        { icon: <TrophyIcon size={10} />, val: score, label: 'Score' },
+                        { icon: <GiftIcon size={10} />, val: rewardLog.length, label: 'Rewards' },
                     ].map((s) => (
                         <div key={s.label} style={{
                             flex: 1, padding: '8px 4px', borderRadius: 8, textAlign: 'center',
@@ -215,7 +219,7 @@ export default function Web3RewardsPanel() {
                     marginTop: 14, padding: 16, borderRadius: 12, textAlign: 'center',
                     background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
                 }}>
-                    <div style={{ fontSize: 28, marginBottom: 8, opacity: 0.6 }}>🎯</div>
+                    <div style={{ fontSize: 28, marginBottom: 8, opacity: 0.6 }}><CrosshairIcon size={28} /></div>
                     <div style={{ fontSize: 12, fontWeight: 600, color: '#fff', marginBottom: 4 }}>No rewards configured</div>
                     <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', lineHeight: 1.6, maxWidth: 200, margin: '0 auto' }}>
                         Add rules above or{' '}

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride';
+import { RocketIcon } from '@/components/icons';
 
 interface EditorTourProps {
     run: boolean;
@@ -20,7 +21,7 @@ export default function EditorTour({ run, onFinish }: EditorTourProps) {
             target: 'body',
             content: (
                 <div>
-                    <h2 style={{ margin: '0 0 8px', fontSize: 18, color: '#f0f0f5' }}>Welcome to G3 Engine! 🚀</h2>
+                    <h2 style={{ display: 'flex', alignItems: 'center', gap: 6, margin: '0 0 8px', fontSize: 18, color: '#f0f0f5' }}>Welcome to G3 Engine! <RocketIcon size={18} /></h2>
                     <p style={{ margin: 0, color: '#a1a1aa', fontSize: 14 }}>
                         Let's take a quick tour to help you build your first game. This will only take a minute.
                     </p>

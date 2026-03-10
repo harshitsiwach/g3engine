@@ -14,10 +14,10 @@
   --bg-elevated: #1a1a32;
 
   /* Glass — more vivid */
-  --glass-bg: rgba(12, 12, 24, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-blur: 24px;
-  --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 0.5px 0 rgba(255,255,255,0.06);
+  --glass-bg: rgba(12, 12, 24, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 32px;
+  --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 0.5px 0 rgba(255,255,255,0.08);
 
   /* Accent Colors — vibrant neon */
   --accent-primary: #8b5cf6;
@@ -127,6 +127,7 @@ body::before {
 /* ---------- Glass Panel Base ---------- */
 .glass-panel {
   background: var(--glass-bg);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
@@ -290,17 +291,17 @@ body::before {
 }
 
 .btn:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
   border-color: var(--border-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
 }
 
 .btn:hover::before { opacity: 1; }
 
 .btn:active {
-  transform: translateY(0);
+  transform: translateY(1px) scale(0.96);
   box-shadow: none;
 }
 
@@ -318,8 +319,8 @@ body::before {
 
 .btn-primary:hover {
   background: linear-gradient(135deg, #9d6ffc, #8b5cf6);
-  box-shadow: 0 0 36px rgba(139, 92, 246, 0.35), 0 4px 16px rgba(0,0,0,0.3);
-  transform: translateY(-2px);
+  box-shadow: 0 0 36px rgba(139, 92, 246, 0.45), 0 4px 16px rgba(0,0,0,0.4);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .btn-success {

@@ -9,7 +9,8 @@ import {
     LightIcon,
     CameraIcon,
     PlaneIcon,
-    TrashIcon
+    TrashIcon,
+    MonitorPlayIcon
 } from '@/components/icons';
 
 const EyeIcon = () => (
@@ -44,7 +45,7 @@ export default function LeftPanel() {
         <div className="editor-left-panel glass-panel">
             <div className="panel-header">
                 <h3>
-                    <span style={{ fontSize: 14 }}>🎬</span>
+                    <MonitorPlayIcon size={14} />
                     Scene
                 </h3>
                 <span style={{

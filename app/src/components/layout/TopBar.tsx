@@ -14,6 +14,8 @@ import {
     RedoIcon,
     PublishIcon,
     Web3Icon,
+    SparklesIcon,
+    CompassIcon,
 } from '@/components/icons';
 
 // --- Transform mode icons ---
@@ -213,7 +215,7 @@ function TopBarContent() {
                         color: useAIStore.getState().isOpen ? '#a78bfa' : undefined,
                     }}
                 >
-                    <span style={{ fontSize: 13 }}>✨</span>
+                    <SparklesIcon size={14} />
                     <span style={{ fontSize: 11 }}>AI</span>
                 </button>
 
@@ -221,7 +223,7 @@ function TopBarContent() {
 
                 {/* Tour */}
                 <button className="btn" onClick={() => setRunTour(true)} data-tooltip="Editor Tour">
-                    <span style={{ fontSize: 13 }}>🧭</span>
+                    <CompassIcon size={14} />
                     <span style={{ fontSize: 11 }}>Tour</span>
                 </button>
 

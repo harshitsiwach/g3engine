@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon, RocketIcon, CheckIcon } from '@/components/icons';
 
 // ─── Platform Definitions ───
 
@@ -189,7 +189,7 @@ export default function PublishModal({ isOpen, onClose }: PublishModalProps) {
                                 textTransform: 'uppercase', letterSpacing: '0.06em',
                                 marginBottom: 12,
                             }}>
-                                🚀 Publish
+                                <RocketIcon size={12} /> Publish
                             </span>
                         </div>
 
@@ -331,7 +331,7 @@ export default function PublishModal({ isOpen, onClose }: PublishModalProps) {
                                         Publishing...
                                     </>
                                 ) : (
-                                    <>🚀 Publish</>
+                                    <><RocketIcon size={14} /> Publish</>
                                 )}
                             </button>
                         </div>
@@ -346,7 +346,7 @@ export default function PublishModal({ isOpen, onClose }: PublishModalProps) {
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             fontSize: 28,
                         }}>
-                            ✅
+                            <CheckIcon size={28} style={{ color: '#14f195' }} />
                         </div>
                         <h2 style={{
                             fontSize: 22, fontWeight: 700, color: '#f0f0f5',

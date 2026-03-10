@@ -267,3 +267,185 @@ export function MonitorPlayIcon(props: React.SVGProps<SVGSVGElement> & { size?: 
   );
 }
 
+// ─── Game Icons (via better-icons / Lucide) ───
+
+export function TrophyIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978m7-7.318v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978M18 9h1.5a1 1 0 0 0 0-5H18M4 22h16" /><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm0 0H4.5a1 1 0 0 1 0-5H6" /></g></svg>
+  );
+}
+
+export function CoinsIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48M15 6h1v4" /><path d="m6.134 14.768l.866-.5l2 3.464" /><circle cx="16" cy="8" r="6" /></g></svg>
+  );
+}
+
+export function CompassIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="m16.24 7.76l-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></g></svg>
+  );
+}
+
+export function FlameIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0a5 5 0 0 1 1-3a1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></svg>
+  );
+}
+
+export function GemIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 3h12l4 6l-10 13L2 9z M11 3l1 10l-5-7m4 7L2 9m9 4l9-4M12 3l1 10l5-7" /></svg>
+  );
+}
+
+export function DiamondIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41L13.7 2.71a2.41 2.41 0 0 0-3.41 0Z" /></svg>
+  );
+}
+
+export function StarIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z" /></svg>
+  );
+}
+
+export function HeartIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676a.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>
+  );
+}
+
+export function RocketIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0m1 7v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></g></svg>
+  );
+}
+
+export function CastleIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M22 20v-9H2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2M18 11V4H6v7" /><path d="M15 22v-4a3 3 0 0 0-6 0v4M3 11l2-6m16 6l-2-6M3 3h2m14 0h2M6 4v2m12-2v2" /></g></svg>
+  );
+}
+
+export function SkullIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="m12.5 17l-.5-1l-.5 1z" /><path d="M15 22a1 1 0 0 0 1-1v-1a2 2 0 0 0 1.56-3.25a8 8 0 1 0-11.12 0A2 2 0 0 0 8 20v1a1 1 0 0 0 1 1z" /><circle cx="15" cy="12" r="1" /><circle cx="9" cy="12" r="1" /></g></svg>
+  );
+}
+
+export function GiftIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M12 7v14m8-10v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8m3.5-4a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5a1 1 0 0 1 0 5" /><rect width="18" height="4" x="3" y="7" rx="1" /></g></svg>
+  );
+}
+
+export function RulerIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Zm-6.8-2.8l2-2m-5-1l2-2m-5-1l2-2m7 11l2-2" /></svg>
+  );
+}
+
+export function LinkIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></g></svg>
+  );
+}
+
+export function HexagonIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>
+  );
+}
+
+export function BotIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2m16 0h2m-12-2v1m4-1v1" /></g></svg>
+  );
+}
+
+export function ShieldIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg>
+  );
+}
+
+export function ScrollIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M19 17V5a2 2 0 0 0-2-2H4" /><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" /></g></svg>
+  );
+}
+
+export function SendIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11zm7.318-19.539l-10.94 10.939" /></svg>
+  );
+}
+
+export function BarChartIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3v18h18m-3-4V9m-5 8V5M8 17v-3" /></svg>
+  );
+}
+
+export function CircleDotIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="1" /></g></svg>
+  );
+}
+
+export function ArrowUpRightIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h10v10M7 17L17 7" /></svg>
+  );
+}
+
+export function ArrowDownLeftIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 7L7 17m10 0H7V7" /></svg>
+  );
+}
+
+export function ArrowRightLeftIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m16 3l4 4l-4 4m4-4H4m4 14l-4-4l4-4m-4 4h16" /></svg>
+  );
+}
+
+export function FlaskIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2M6.453 15h11.094M8.5 2h7" /></svg>
+  );
+}
+
+export function GlobeIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20a14.5 14.5 0 0 0 0-20M2 12h20" /></g></svg>
+  );
+}
+
+export function ZapIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></svg>
+  );
+}
+
+export function CrosshairIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M22 12h-4M6 12H2m10-6V2m0 20v-4" /></g></svg>
+  );
+}
+
+export function PaletteIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688c0-.437-.18-.835-.437-1.125c-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2" /></g></svg>
+  );
+}
+
+export function PersonRunIcon(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg {...props} width={props.size || 24} height={props.size || 24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="13" cy="4" r="2" /><path d="m5.4 17l1 1.8c.2.4.7.6 1.2.4L10 18m-1-3l1.5-1.5L14 16h3m-5-6.5L9 12m-4.8 2.3l2.8-2.1c.5-.4 1.2-.3 1.6.2L10 14" /></g></svg>
+  );
+}
+
