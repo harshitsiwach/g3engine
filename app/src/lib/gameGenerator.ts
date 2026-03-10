@@ -7,11 +7,12 @@
 
 import { useEditorStore, ObjectType } from '@/store/editorStore';
 import { useEditor2DStore } from '@/store/editor2DStore';
+import { useGameRewardStore, GameEvent, RewardType } from '@/store/gameRewardStore';
 
 // ---------- Command Types ----------
 
 export interface GameCommand {
-    type: 'add_object' | 'add_sprite' | 'set_transform' | 'set_material' | 'enable_web3' | 'message';
+    type: 'add_object' | 'add_sprite' | 'set_transform' | 'set_material' | 'enable_web3' | 'setup_rewards' | 'configure_reward_rule' | 'message';
     [key: string]: any;
 }
 
@@ -141,6 +142,69 @@ export function execute3DCommands(commands: GameCommand[]): string[] {
                         editorState.toggleWeb3();
                     }
                     log.push('✅ Web3 enabled');
+                    break;
+                }
+
+                case 'setup_rewards': {
+                    const rewardStore = useGameRewardStore.getState();
+                    rewardStore.setRewardsEnabled(true);
+
+                    const preset = cmd.preset || 'endless_runner';
+                    // Clear existing rules and apply preset
+                    const presets: Record<string, Array<{ event: GameEvent; rewardType: RewardType; amount: number; tokenMint: string; tokenSymbol: string; nftName: string; cooldownMs: number; milestoneThreshold: number; enabled: boolean }>> = {
+                        endless_runner: [
+                            { event: 'coin_collected', rewardType: 'token_drop', amount: 10, tokenMint: '', tokenSymbol: 'G3', nftName: '', cooldownMs: 0, milestoneThreshold: 0, enabled: true },
+                            { event: 'obstacle_dodged', rewardType: 'token_drop', amount: 5, tokenMint: '', tokenSymbol: 'G3', nftName: '', cooldownMs: 2000, milestoneThreshold: 0, enabled: true },
+                            { event: 'score_milestone', rewardType: 'nft_mint', amount: 1, tokenMint: '', tokenSymbol: '', nftName: 'Achievement Badge', cooldownMs: 0, milestoneThreshold: 100, enabled: true },
+                        ],
+                        achievement: [
+                            { event: 'score_milestone', rewardType: 'nft_mint', amount: 1, tokenMint: '', tokenSymbol: '', nftName: 'Achievement NFT', cooldownMs: 0, milestoneThreshold: 50, enabled: true },
+                            { event: 'level_complete', rewardType: 'token_drop', amount: 50, tokenMint: '', tokenSymbol: 'G3', nftName: '', cooldownMs: 0, milestoneThreshold: 0, enabled: true },
+                        ],
+                        play_to_earn: [
+                            { event: 'coin_collected', rewardType: 'token_drop', amount: 1, tokenMint: '', tokenSymbol: 'G3', nftName: '', cooldownMs: 0, milestoneThreshold: 0, enabled: true },
+                            { event: 'game_over', rewardType: 'sol_tip', amount: 0.001, tokenMint: '', tokenSymbol: '', nftName: '', cooldownMs: 0, milestoneThreshold: 0, enabled: true },
+                            { event: 'score_milestone', rewardType: 'nft_mint', amount: 1, tokenMint: '', tokenSymbol: '', nftName: 'Play-to-Earn Badge', cooldownMs: 0, milestoneThreshold: 200, enabled: true },
+                        ],
+                    };
+
+                    const rules = presets[preset] || presets.endless_runner;
+                    // Clear old rules
+                    const currentRules = useGameRewardStore.getState().rules;
+                    for (const r of currentRules) {
+                        rewardStore.removeRule(r.id);
+                    }
+                    // Add preset rules
+                    for (const r of rules) {
+                        rewardStore.addRule(r);
+                    }
+
+                    log.push(`✅ Rewards preset applied: ${preset}`);
+                    break;
+                }
+
+                case 'configure_reward_rule': {
+                    const rewardStore = useGameRewardStore.getState();
+                    rewardStore.setRewardsEnabled(true);
+
+                    rewardStore.addRule({
+                        event: (cmd.event || 'coin_collected') as GameEvent,
+                        rewardType: (cmd.rewardType || 'token_drop') as RewardType,
+                        amount: cmd.amount ?? 10,
+                        tokenMint: cmd.tokenMint || '',
+                        tokenSymbol: cmd.tokenSymbol || 'G3',
+                        nftName: cmd.nftName || '',
+                        cooldownMs: cmd.cooldownMs ?? 0,
+                        milestoneThreshold: cmd.milestoneThreshold ?? 0,
+                        enabled: true,
+                    });
+
+                    const desc = cmd.rewardType === 'nft_mint'
+                        ? `Mint "${cmd.nftName || 'NFT'}" on ${cmd.event}`
+                        : cmd.rewardType === 'sol_tip'
+                            ? `Send ${cmd.amount} SOL on ${cmd.event}`
+                            : `Drop ${cmd.amount} ${cmd.tokenSymbol || 'G3'} on ${cmd.event}`;
+                    log.push(`✅ Reward rule added: ${desc}`);
                     break;
                 }
 
