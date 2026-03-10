@@ -71,7 +71,10 @@ export default function Web3Panel() {
 
                 {/* Content */}
                 <div style={{ flex: 1, overflow: 'auto', padding: 12 }}>
-                    {!connected ? (
+                    {/* Rewards tab is always accessible (config doesn't need wallet) */}
+                    {activeTab === 'rewards' ? (
+                        <Web3RewardsPanel />
+                    ) : !connected ? (
                         <div style={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center',
                             justifyContent: 'center', height: '100%', gap: 16, padding: 20,
@@ -108,9 +111,6 @@ export default function Web3Panel() {
                             )}
                             {activeTab === 'economy' && (
                                 <EconomyTab economy={economy} updateEconomy={updateEconomy} tokens={tokens} />
-                            )}
-                            {activeTab === 'rewards' && (
-                                <Web3RewardsPanel />
                             )}
                             {activeTab === 'settings' && (
                                 <SettingsTab
