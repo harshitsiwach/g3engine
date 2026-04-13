@@ -10,6 +10,29 @@ export type ShapeType = 'rect' | 'circle' | 'line' | 'polygon';
 
 export interface Vec2 { x: number; y: number }
 
+// ─── Animation ───
+export interface AnimationFrame {
+    emoji: string;
+    duration: number; // ms
+}
+
+export interface SpriteAnimation {
+    name: string;
+    frames: AnimationFrame[];
+    loop: boolean;
+}
+
+// ─── Physics ───
+export interface PhysicsBody {
+    enabled: boolean;
+    gravity: number;
+    velocity: Vec2;
+    friction: number;
+    bounce: number;
+    isStatic: boolean; // platforms, walls
+    isTrigger: boolean; // collectibles, checkpoints
+}
+
 export interface Sprite2D {
     id: string;
     name: string;
@@ -38,6 +61,13 @@ export interface Sprite2D {
     fontFamily?: string;
     // Sprite image
     emoji?: string; // For quick prototyping
+    // Animation
+    animations?: SpriteAnimation[];
+    currentAnimation?: string;
+    currentFrame?: number;
+    animationTimer?: number;
+    // Physics
+    physics?: PhysicsBody;
 }
 
 export interface Layer2D {

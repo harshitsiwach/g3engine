@@ -247,6 +247,7 @@ export function execute2DCommands(commands: GameCommand[]): string[] {
                     text: cmd.text,
                     fontSize: cmd.fontSize,
                     fontFamily: cmd.fontFamily,
+                    physics: cmd.physics,
                 });
                 log.push(`✅ Added sprite: "${cmd.name || 'Sprite'}"`);
             }
