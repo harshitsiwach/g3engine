@@ -321,10 +321,11 @@ export default function NewProjectPage() {
                         <p style={s.subtitle}>Choose your game's dimension. You can always switch later.</p>
                         <div style={s.grid2}>
                             <div
-                                style={{ ...s.option(false, 'green'), opacity: 0.5, cursor: 'not-allowed' }}
+                                style={s.option(config.dimension === '2d', 'green')}
+                                onClick={() => setDimension('2d')}
                             >
-                                <span style={s.iconLarge}><GamepadIcon size={40} style={{ color: '#7a7f8d', transition: 'color 0.2s' }} /></span>
-                                <span style={s.optionLabel}>2D Game <span style={{ fontSize: 10, background: 'rgba(20,241,149,0.2)', color: '#14f195', padding: '2px 6px', borderRadius: 4, marginLeft: 4 }}>Coming Soon</span></span>
+                                <span style={s.iconLarge}><GamepadIcon size={40} style={{ color: config.dimension === '2d' ? '#14f195' : '#7a7f8d', transition: 'color 0.2s' }} /></span>
+                                <span style={s.optionLabel}>2D Game</span>
                                 <span style={s.optionDesc}>Sprites, tilemaps, and side-scrolling action</span>
                             </div>
                             <div
