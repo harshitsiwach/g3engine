@@ -109,6 +109,7 @@ export default function TopBar2D() {
     const {
         activeTool, setTool,
         isPlaying, togglePlay,
+        web3Enabled, toggleWeb3,
         showGrid, toggleGrid,
         snapToGrid, toggleSnap,
         undo, redo,
@@ -233,6 +234,34 @@ export default function TopBar2D() {
                 <button className="btn btn-icon" onClick={redo} disabled={historyIndex >= history.length - 1}
                     style={historyIndex >= history.length - 1 ? { opacity: 0.3, cursor: 'not-allowed' } : {}} data-tooltip="Redo (⌘⇧Z)">
                     <RedoIcon />
+                </button>
+
+                <div className="toolbar-divider" />
+
+                {/* Web3 Toggle */}
+                <button
+                    className={`btn ${web3Enabled ? 'btn-success' : ''}`}
+                    onClick={toggleWeb3}
+                    data-tooltip={`Web3 ${web3Enabled ? 'ON' : 'OFF'}`}
+                    style={web3Enabled ? {
+                        background: 'rgba(139,92,246,0.15)',
+                        borderColor: 'rgba(139,92,246,0.35)',
+                        color: '#a78bfa',
+                        boxShadow: '0 0 12px rgba(139,92,246,0.12)',
+                    } : {}}
+                >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                    </svg>
+                    <span style={{ fontSize: 11 }}>Web3</span>
+                    {web3Enabled && (
+                        <span style={{
+                            width: 6, height: 6, borderRadius: '50%',
+                            background: '#a78bfa',
+                            boxShadow: '0 0 8px rgba(139,92,246,0.5)',
+                        }} />
+                    )}
                 </button>
 
                 <div className="toolbar-divider" />

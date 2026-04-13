@@ -84,6 +84,7 @@ export const TEMPLATES_2D: Record<GameTemplate, GameCommand[]> = {
         { type: 'add_sprite', spriteType: 'sprite', emoji: '🪙', name: 'Coin 1', x: 250, y: 370, width: 32, height: 32, physics: { enabled: true, gravity: 0, velocity: { x: 0, y: 0 }, friction: 0, bounce: 0, isStatic: true, isTrigger: true } },
         { type: 'add_sprite', spriteType: 'sprite', emoji: '🪙', name: 'Coin 2', x: 550, y: 270, width: 32, height: 32, physics: { enabled: true, gravity: 0, velocity: { x: 0, y: 0 }, friction: 0, bounce: 0, isStatic: true, isTrigger: true } },
         { type: 'add_sprite', spriteType: 'sprite', emoji: '🚩', name: 'Flag', x: 700, y: 480, width: 40, height: 56 },
+        { type: 'enable_web3' }
     ],
     'endless-runner': [
         { type: 'add_sprite', spriteType: 'shape', shapeType: 'rect', name: 'Night Sky', x: 400, y: 300, width: 800, height: 600, fillColor: '#1e1e2f' },

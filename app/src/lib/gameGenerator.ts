@@ -281,7 +281,16 @@ export function executeCommands(commands: GameCommand[], editorMode: '2d' | '3d'
     // Handle enable_web3 separately
     const web3Cmds = commands.filter((c) => c.type === 'enable_web3');
     if (web3Cmds.length > 0) {
-        log.push(...execute3DCommands(web3Cmds));
+        // Enable in both 3D and 2D editors
+        const editor3D = useEditorStore.getState();
+        if (!editor3D.web3Enabled) {
+            editor3D.toggleWeb3();
+        }
+        const editor2D = useEditor2DStore.getState();
+        if (!editor2D.web3Enabled) {
+            editor2D.toggleWeb3();
+        }
+        log.push('✅ Web3 enabled');
     }
 
     return log;

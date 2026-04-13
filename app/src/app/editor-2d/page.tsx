@@ -13,11 +13,13 @@ const RightPanel2D = dynamic(() => import('@/components/editor-2d/RightPanel2D')
 const BottomPanel2D = dynamic(() => import('@/components/editor-2d/BottomPanel2D'), { ssr: false });
 const Viewport2D = dynamic(() => import('@/components/editor-2d/Viewport2D'), { ssr: false });
 const GameHUD2D = dynamic(() => import('@/components/editor-2d/GameHUD2D'), { ssr: false });
+const Web3Panel = dynamic(() => import('@/components/web3/Web3Panel'), { ssr: false });
 
 export default function Editor2DPage() {
     const [mounted, setMounted] = useState(false);
     const { config } = useProjectStore();
     const isPlaying = useEditor2DStore((s) => s.isPlaying);
+    const web3Enabled = useEditor2DStore((s) => s.web3Enabled);
 
     useEffect(() => { setMounted(true); }, []);
 
@@ -61,6 +63,16 @@ export default function Editor2DPage() {
             {!isPlaying && <LeftPanel2D />}
             {!isPlaying && <RightPanel2D />}
             {!isPlaying && <BottomPanel2D />}
+
+            {/* Web3 Panel — slides in from right when enabled */}
+            {web3Enabled && !isPlaying && (
+                <div style={{
+                    position: 'fixed', top: 48, right: 0, width: 300, bottom: 0, zIndex: 50,
+                    animation: 'slideInRight 0.25s ease-out',
+                }}>
+                    <Web3Panel />
+                </div>
+            )}
         </div>
     );
 }

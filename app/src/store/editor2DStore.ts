@@ -106,6 +106,7 @@ export interface Editor2DState {
 
     // Editor state
     isPlaying: boolean;
+    web3Enabled: boolean;
     canvasWidth: number;
     canvasHeight: number;
 
@@ -142,6 +143,7 @@ export interface Editor2DState {
 
     // Editor
     togglePlay: () => void;
+    toggleWeb3: () => void;
 
     // History
     pushHistory: () => void;
@@ -197,6 +199,7 @@ export const useEditor2DStore = create<Editor2DState>((set, get) => ({
     showGrid: true,
 
     isPlaying: false,
+    web3Enabled: false,
     canvasWidth: 800,
     canvasHeight: 600,
 
@@ -335,6 +338,7 @@ export const useEditor2DStore = create<Editor2DState>((set, get) => ({
     // ─── Editor ───
 
     togglePlay: () => set((s) => ({ isPlaying: !s.isPlaying })),
+    toggleWeb3: () => set((s) => ({ web3Enabled: !s.web3Enabled })),
 
     // ─── History ───
 
