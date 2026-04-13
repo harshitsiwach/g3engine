@@ -22,7 +22,12 @@ export type GameTemplate =
     | 'token-gate-room'
     | 'nft-gallery'
     | 'multiplayer-arena'
-    | 'endless-runner';
+    | 'endless-runner'
+    | 'puzzle-grid'
+    | 'top-down-rpg'
+    | 'top-down-shooter'
+    | 'top-down-adventure'
+    | 'racing-track';
 
 export interface ProjectConfig {
     name: string;

@@ -271,13 +271,31 @@ export default function NewProjectPage() {
             case 'dimension': setStep('genre'); break;
             case 'genre': setStep('name'); break;
             case 'name':
-                // Set template based on genre directly
-                if (config.genre === 'platformer') {
-                    setTemplate('endless-runner');
+                // Auto-select template based on genre + dimension
+                const genreTemplateMap: Record<string, { '2d': GameTemplate; '3d': GameTemplate }> = {
+                    platformer: { '2d': 'platformer-starter', '3d': 'platformer-starter' },
+                    puzzle: { '2d': 'puzzle-grid', '3d': 'blank' },
+                    rpg: { '2d': 'top-down-rpg', '3d': 'blank' },
+                    racing: { '2d': 'racing-track', '3d': 'endless-runner' },
+                    shooter: { '2d': 'top-down-shooter', '3d': 'multiplayer-arena' },
+                    adventure: { '2d': 'top-down-adventure', '3d': 'blank' },
+                    strategy: { '2d': 'blank', '3d': 'blank' },
+                    sandbox: { '2d': 'blank', '3d': 'blank' },
+                    social: { '2d': 'blank', '3d': 'multiplayer-arena' },
+                    other: { '2d': 'blank', '3d': 'blank' },
+                };
+
+                if (!config.template && config.genre && config.dimension) {
+                    const mapping = genreTemplateMap[config.genre];
+                    if (mapping) {
+                        setTemplate(mapping[config.dimension]);
+                    } else {
+                        setTemplate('blank');
+                    }
                 } else if (!config.template) {
                     setTemplate('blank');
                 }
-                
+
                 // Navigate to appropriate editor
                 if (config.dimension === '2d') {
                     router.push('/editor-2d');
