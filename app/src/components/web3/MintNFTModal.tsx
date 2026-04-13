@@ -12,7 +12,7 @@ interface Props {
 
 export default function MintNFTModal({ isOpen, onClose }: Props) {
     const { publicKey } = useWallet();
-    const { addNft, addTransaction, network } = useWeb3Store();
+    const { addNft, addTransaction, solanaNetwork: network } = useWeb3Store();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -56,6 +56,7 @@ export default function MintNFTModal({ isOpen, onClose }: Props) {
                 status: 'confirmed',
                 description: `Minted NFT: ${name}`,
                 timestamp: Date.now(),
+                chainType: 'solana',
             });
 
             addNft({
@@ -63,6 +64,7 @@ export default function MintNFTModal({ isOpen, onClose }: Props) {
                 name,
                 imageUri: imageUrl,
                 collection: collection || undefined,
+                chainType: 'solana',
                 attributes: attributes.filter((a) => a.trait_type && a.value),
             });
 

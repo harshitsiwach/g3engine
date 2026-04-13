@@ -9,7 +9,7 @@ import { useWeb3Store } from '@/store/web3Store';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 export default function SolanaProvider({ children }: { children: React.ReactNode }) {
-    const { rpcEndpoint } = useWeb3Store();
+    const { solanaRpcEndpoint: rpcEndpoint } = useWeb3Store();
 
     // Let the wallet adapter auto-detect installed wallets (Phantom, Solflare, etc.)
     // Providing explicit adapters can cause duplicate key errors (e.g., MetaMask)

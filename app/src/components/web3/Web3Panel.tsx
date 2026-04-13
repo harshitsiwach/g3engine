@@ -24,8 +24,8 @@ export default function Web3Panel() {
         activeTab, setActiveTab,
         tokens, nfts,
         economy, updateEconomy,
-        network, setNetwork,
-        walletAddress, solBalance,
+        solanaNetwork: network, setSolanaNetwork: setNetwork,
+        solanaAddress: walletAddress, solBalance,
         transactions,
     } = useWeb3Store();
     const { connected } = useWallet();

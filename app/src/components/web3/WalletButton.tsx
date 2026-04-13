@@ -10,12 +10,12 @@ export default function WalletButton() {
     const { publicKey, connected, disconnect } = useWallet();
     const { connection } = useConnection();
     const { setVisible } = useWalletModal();
-    const { setWalletConnected, setSolBalance, solBalance } = useWeb3Store();
+    const { setSolanaConnected, setSolBalance, solBalance } = useWeb3Store();
 
     // Sync wallet state to web3Store
     useEffect(() => {
-        setWalletConnected(connected, publicKey?.toBase58() ?? null);
-    }, [connected, publicKey, setWalletConnected]);
+        setSolanaConnected(connected, publicKey?.toBase58() ?? null);
+    }, [connected, publicKey, setSolanaConnected]);
 
     // Fetch SOL balance
     useEffect(() => {

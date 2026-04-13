@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@metaplex-foundation/js": "^0.20.1",
-    "@next/swc-win32-x64-msvc": "^16.1.6",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@solana/spl-token": "^0.4.14",
@@ -20,6 +19,7 @@
     "@solana/wallet-adapter-wallets": "^0.19.37",
     "@solana/web3.js": "^1.98.4",
     "@xyflow/react": "^12.10.1",
+    "ethers": "^6.13.0",
     "bs58": "^6.0.0",
     "next": "16.1.6",
     "react": "19.2.3",

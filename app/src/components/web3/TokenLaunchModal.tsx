@@ -13,7 +13,7 @@ interface Props {
 export default function TokenLaunchModal({ isOpen, onClose }: Props) {
     const { publicKey, signTransaction } = useWallet();
     const { connection } = useConnection();
-    const { addToken, addTransaction, network } = useWeb3Store();
+    const { addToken, addTransaction, solanaNetwork: network } = useWeb3Store();
 
     const [name, setName] = useState('');
     const [symbol, setSymbol] = useState('');
@@ -47,6 +47,7 @@ export default function TokenLaunchModal({ isOpen, onClose }: Props) {
                 status: 'confirmed',
                 description: `Launched $${symbol.toUpperCase()} on Pump.fun`,
                 timestamp: Date.now(),
+                chainType: 'solana',
             });
 
             addToken({
@@ -56,6 +57,7 @@ export default function TokenLaunchModal({ isOpen, onClose }: Props) {
                 balance: 0,
                 decimals: 6,
                 imageUri: imageUrl || undefined,
+                chainType: 'solana',
                 isPumpToken: true,
                 bondingCurveComplete: false,
                 priceInSol: 0.000001,

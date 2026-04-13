@@ -15,27 +15,27 @@ type Screen = 'portfolio' | 'nfts' | 'activity' | 'settings';
 // ─── Mock Data (used when wallet not connected) ───
 
 const MOCK_TOKENS: TokenInfo[] = [
-    { mint: 'So11...1112', name: 'Solana', symbol: 'SOL', balance: 24.58, decimals: 9, priceInSol: 1, imageUri: '' },
-    { mint: 'EPjF...Pump', name: 'G3 Token', symbol: 'G3', balance: 150000, decimals: 6, isPumpToken: true, priceInSol: 0.0003, imageUri: '' },
-    { mint: 'USDC...mint', name: 'USD Coin', symbol: 'USDC', balance: 1250.00, decimals: 6, priceInSol: 0.0067, imageUri: '' },
-    { mint: 'RAY...mint', name: 'Raydium', symbol: 'RAY', balance: 89.5, decimals: 6, priceInSol: 0.012, imageUri: '' },
-    { mint: 'JUP...mint', name: 'Jupiter', symbol: 'JUP', balance: 320, decimals: 6, priceInSol: 0.0058, imageUri: '' },
-    { mint: 'BONK...mt', name: 'Bonk', symbol: 'BONK', balance: 5000000, decimals: 5, priceInSol: 0.0000001, imageUri: '' },
+    { mint: 'So11...1112', name: 'Solana', symbol: 'SOL', balance: 24.58, decimals: 9, priceInSol: 1, imageUri: '', chainType: 'solana' },
+    { mint: 'EPjF...Pump', name: 'G3 Token', symbol: 'G3', balance: 150000, decimals: 6, isPumpToken: true, priceInSol: 0.0003, imageUri: '', chainType: 'solana' },
+    { mint: 'USDC...mint', name: 'USD Coin', symbol: 'USDC', balance: 1250.00, decimals: 6, priceInSol: 0.0067, imageUri: '', chainType: 'solana' },
+    { mint: 'RAY...mint', name: 'Raydium', symbol: 'RAY', balance: 89.5, decimals: 6, priceInSol: 0.012, imageUri: '', chainType: 'solana' },
+    { mint: 'JUP...mint', name: 'Jupiter', symbol: 'JUP', balance: 320, decimals: 6, priceInSol: 0.0058, imageUri: '', chainType: 'solana' },
+    { mint: 'BONK...mt', name: 'Bonk', symbol: 'BONK', balance: 5000000, decimals: 5, priceInSol: 0.0000001, imageUri: '', chainType: 'solana' },
 ];
 
 const MOCK_NFTS: NFTInfo[] = [
-    { mint: 'nft1', name: 'Cyber Sword #42', imageUri: '', collection: 'G3 Weapons', attributes: [{ trait_type: 'Rarity', value: 'Legendary' }] },
-    { mint: 'nft2', name: 'Shield of Light #7', imageUri: '', collection: 'G3 Weapons', attributes: [{ trait_type: 'Rarity', value: 'Epic' }] },
-    { mint: 'nft3', name: 'Space Explorer #128', imageUri: '', collection: 'G3 Characters', attributes: [{ trait_type: 'Rarity', value: 'Rare' }] },
-    { mint: 'nft4', name: 'Dragon Mount #3', imageUri: '', collection: 'G3 Mounts', attributes: [{ trait_type: 'Rarity', value: 'Legendary' }] },
+    { mint: 'nft1', name: 'Cyber Sword #42', imageUri: '', collection: 'G3 Weapons', chainType: 'solana', attributes: [{ trait_type: 'Rarity', value: 'Legendary' }] },
+    { mint: 'nft2', name: 'Shield of Light #7', imageUri: '', collection: 'G3 Weapons', chainType: 'solana', attributes: [{ trait_type: 'Rarity', value: 'Epic' }] },
+    { mint: 'nft3', name: 'Space Explorer #128', imageUri: '', collection: 'G3 Characters', chainType: 'solana', attributes: [{ trait_type: 'Rarity', value: 'Rare' }] },
+    { mint: 'nft4', name: 'Dragon Mount #3', imageUri: '', collection: 'G3 Mounts', chainType: 'solana', attributes: [{ trait_type: 'Rarity', value: 'Legendary' }] },
 ];
 
 const MOCK_TXS: Web3Transaction[] = [
-    { id: '1', type: 'token_launch', signature: '4xK...abc', status: 'confirmed', description: 'Launched G3 Token on Pump.fun', timestamp: Date.now() - 3600000 },
-    { id: '2', type: 'mint_nft', signature: '7bR...def', status: 'confirmed', description: 'Minted Cyber Sword #42', timestamp: Date.now() - 7200000 },
-    { id: '3', type: 'buy', signature: '9cQ...ghi', status: 'confirmed', description: 'Bought 150K G3 Tokens', timestamp: Date.now() - 86400000 },
-    { id: '4', type: 'airdrop', signature: '2dF...jkl', status: 'pending', description: 'Airdrop to 50 wallets', timestamp: Date.now() - 120000 },
-    { id: '5', type: 'transfer', signature: '5eG...mno', status: 'confirmed', description: 'Sent 2 SOL to player', timestamp: Date.now() - 172800000 },
+    { id: '1', type: 'token_launch', signature: '4xK...abc', status: 'confirmed', description: 'Launched G3 Token on Pump.fun', timestamp: Date.now() - 3600000, chainType: 'solana' },
+    { id: '2', type: 'mint_nft', signature: '7bR...def', status: 'confirmed', description: 'Minted Cyber Sword #42', timestamp: Date.now() - 7200000, chainType: 'solana' },
+    { id: '3', type: 'buy', signature: '9cQ...ghi', status: 'confirmed', description: 'Bought 150K G3 Tokens', timestamp: Date.now() - 86400000, chainType: 'solana' },
+    { id: '4', type: 'airdrop', signature: '2dF...jkl', status: 'pending', description: 'Airdrop to 50 wallets', timestamp: Date.now() - 120000, chainType: 'solana' },
+    { id: '5', type: 'transfer', signature: '5eG...mno', status: 'confirmed', description: 'Sent 2 SOL to player', timestamp: Date.now() - 172800000, chainType: 'solana' },
 ];
 
 const CHART_DATA = [12, 15, 14, 18, 22, 20, 25, 28, 26, 32, 35, 38, 36, 42, 45, 48, 44, 50, 55, 58];
@@ -58,7 +58,7 @@ const TX_ICONS: Record<string, React.ReactNode> = {
 
 export default function WalletDashboard() {
     const [screen, setScreen] = useState<Screen>('portfolio');
-    const { walletConnected, walletAddress, solBalance, tokens, nfts, transactions, network } = useWeb3Store();
+    const { solanaConnected: walletConnected, solanaAddress: walletAddress, solBalance, tokens, nfts, transactions, solanaNetwork: network } = useWeb3Store();
 
     const displayTokens = tokens.length > 0 ? tokens : MOCK_TOKENS;
     const displayNfts = nfts.length > 0 ? nfts : MOCK_NFTS;
@@ -322,7 +322,7 @@ function ActivityScreen({ txs }: { txs: Web3Transaction[] }) {
 // ─── Settings Screen ───
 
 function SettingsScreen() {
-    const { network, setNetwork, rpcEndpoint, walletAddress, walletConnected } = useWeb3Store();
+    const { solanaNetwork: network, setSolanaNetwork: setNetwork, solanaRpcEndpoint: rpcEndpoint, solanaAddress: walletAddress, solanaConnected: walletConnected } = useWeb3Store();
     return (
         <>
             <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em', marginBottom: 14, marginTop: 8 }}>SETTINGS</div>
