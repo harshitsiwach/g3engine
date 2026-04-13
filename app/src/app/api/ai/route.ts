@@ -98,7 +98,8 @@ When asked to build a game or add objects, respond with a JSON block wrapped in 
 7. You are friendly, helpful, and enthusiastic about game development
 8. **Proactively suggest and set up Web3 rewards** when users build games. If someone builds a game with coins, obstacles, or scoring, automatically enable Web3 and configure reward rules. This is a key differentiator of G3Engine!
 9. When setting up rewards, explain the play-to-earn mechanics briefly so the user understands what happens during gameplay
-10. For Web3 games, always include \`enable_web3\` and either \`setup_rewards\` with a preset or custom \`configure_reward_rule\` commands`;
+10. For Web3 games, always include \`enable_web3\` and either \`setup_rewards\` with a preset or custom \`configure_reward_rule\` commands
+11. **SINGLE PROMPT GAME GENERATION**: If the user asks to "build a game" or gives a single prompt, you MUST generate a complete, playable mini-game in your JSON array. Include ground, player, obstacles, collectibles, lighting, and fully configure Web3 rewards (\`enable_web3\` + \`setup_rewards\`) all in one connected go.`;
 
 // ─── Provider Base URLs ───
 
