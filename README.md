@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="app/public/banner.png" alt="G3Engine Banner" width="100%" />
-</p>
+
 
 <h1 align="center">G3Engine</h1>
 
